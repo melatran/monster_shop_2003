@@ -49,9 +49,8 @@ RSpec.describe "Logging In" do
       fill_in :password, with: user.password
 
       click_button "Login"
-
+      save_and_open_page
       expect(current_path).to eq('/merchant/dashboard')
-
       expect(page).to have_content("Welcome, #{user.name}")
   end
 end
