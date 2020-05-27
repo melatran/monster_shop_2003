@@ -1,27 +1,44 @@
-<%= form_tag "/users", method: :post do%>
-
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
-
-    <%= label_tag :address %>
-    <%= text_field_tag :address %>
-
-    <%= label_tag :city %>
-    <%= text_field_tag :city %>
-
-    <%= label_tag :state %>
-    <%= text_field_tag :state %>
-
-    <%= label_tag :zipcode %>
-    <%= text_field_tag :zip %>
-
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-
-    <%= submit_tag "Create Account"%>
-
-<%end %>
-
+<h4>Create New Account</h4>
+<form class= "form-inline" oninput='confirm_password.setCustomValidity(confirm_password.value != password.value ? "Passwords do not match." : "")'><%= form_tag "/users", method: :post do%>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label class="col-sm-2 col-form-label"><%= label_tag :name %></label>
+      <%= text_field_tag :name %>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="col-sm-3 col-form-label"><%= label_tag :address %></label>
+      <%= text_field_tag :address %>
+    </div>
+  </div>
+  <div class="row"
+    <div class="col-6">
+      <label><%= label_tag :city %></label>
+      <input class="form-control" type="text"<%= text_field_tag :city, nil, class: "form-control"%>
+    </div>
+    <div class="form-group col-4">
+      <label><%= label_tag :state %></label>
+      <input class="form-control" type="text"<%= text_field_tag :state ,nil, class: "form-control"%>
+    </div>
+    <div class="form-group col-2">
+      <label><%= label_tag :zipcode %></label>
+      <input class="form-control" type="text"<%= text_field_tag :zip %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label><%= label_tag :email %></label>
+      <%= text_field_tag :email %>
+    </div>
+    <div class="form-group col-md-4">
+      <label><%= label_tag :password %></label>
+      <%= password_field_tag :password %>
+    </div>
+    <div class="form-group col-md-4">
+      <label><%= label_tag "Confirm Password" %></label>
+      <input type=password name=confirm_password class="form-control" />
+    </div>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= submit_tag "Create Account"%>
+    <%end %>
+  </div>
+</form>
