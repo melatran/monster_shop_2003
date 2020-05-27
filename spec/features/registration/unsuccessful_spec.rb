@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor' do
     describe 'when I visit registration page' do
-        it 'shows a message when I do not fill out the registration page completely' do 
+        it 'shows a message when I do not fill out the registration page completely' do
 
             visit '/register'
 
@@ -10,9 +10,9 @@ RSpec.describe 'As a visitor' do
             address = "123 Main St."
             city = "Denver"
             state = "Colorado"
-            zip = "80209" 
+            zip = "80209"
             email = "example_email@gmail.com"
-            password = "password"  
+            password = "password"
 
             #fill_in :name, with: name
             fill_in :address, with: address
@@ -23,7 +23,7 @@ RSpec.describe 'As a visitor' do
             fill_in :password, with: password
 
             click_on "Create Account"
-
+            
             expect(page).to have_content("Name can't be blank")
 
             visit '/register'
@@ -32,9 +32,9 @@ RSpec.describe 'As a visitor' do
             address = "123 Main St."
             city = "Denver"
             state = "Colorado"
-            zip = "80209" 
+            zip = "80209"
             email = "example_email@gmail.com"
-            password = "password"  
+            password = "password"
 
             fill_in :name, with: name
             #fill_in :address, with: address
@@ -54,9 +54,9 @@ RSpec.describe 'As a visitor' do
             address = "123 Main St."
             city = "Denver"
             state = "Colorado"
-            zip = "80209" 
+            zip = "80209"
             email = "example_email@gmail.com"
-            password = "password"  
+            password = "password"
 
             fill_in :name, with: name
             fill_in :address, with: address
@@ -76,9 +76,9 @@ RSpec.describe 'As a visitor' do
             address = "123 Main St."
             city = "Denver"
             state = "Colorado"
-            zip = "80209" 
+            zip = "80209"
             email = "example_email@gmail.com"
-            password = "password"  
+            password = "password"
 
             fill_in :name, with: name
             fill_in :address, with: address
@@ -98,9 +98,9 @@ RSpec.describe 'As a visitor' do
             address = "123 Main St."
             city = "Denver"
             state = "Colorado"
-            zip = "80209" 
+            zip = "80209"
             email = "example_email@gmail.com"
-            password = "password"  
+            password = "password"
 
             fill_in :name, with: name
             fill_in :address, with: address
