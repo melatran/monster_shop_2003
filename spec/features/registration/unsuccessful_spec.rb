@@ -21,6 +21,7 @@ RSpec.describe 'As a visitor' do
             fill_in :zip, with: zip
             fill_in :email, with: email
             fill_in :password, with: password
+            fill_in 'confirm_password', with: password
 
             click_on "Create Account"
             
@@ -43,6 +44,7 @@ RSpec.describe 'As a visitor' do
             fill_in :zip, with: zip
             fill_in :email, with: email
             fill_in :password, with: password
+            fill_in 'confirm_password', with: password
 
             click_on "Create Account"
 
@@ -65,6 +67,7 @@ RSpec.describe 'As a visitor' do
             fill_in :zip, with: zip
             fill_in :email, with: email
             fill_in :password, with: password
+            fill_in 'confirm_password', with: password
 
             click_on "Create Account"
 
@@ -87,6 +90,7 @@ RSpec.describe 'As a visitor' do
             fill_in :zip, with: zip
             fill_in :email, with: email
             fill_in :password, with: password
+            fill_in 'confirm_password', with: password
 
             click_on "Create Account"
 
@@ -109,6 +113,7 @@ RSpec.describe 'As a visitor' do
             #fill_in :zip, with: zip
             fill_in :email, with: email
             fill_in :password, with: password
+            fill_in 'confirm_password', with: password
 
             click_on "Create Account"
 
