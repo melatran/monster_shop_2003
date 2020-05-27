@@ -41,5 +41,7 @@ Rails.application.routes.draw do
 
   get "/profile", to: 'profile#index'
 
+  get "/login", to: 'login#index'
+
 
 end
