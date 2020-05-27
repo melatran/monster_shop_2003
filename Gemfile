@@ -15,7 +15,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem "table_print"
 gem 'bcrypt', '~> 3.1.7'
-
+# bootstrap depencies
+gem 'bootstrap', '~> 4.5.0'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
