@@ -1,44 +1,41 @@
-<h4>Create New Account</h4>
-<form class= "form-inline" oninput='confirm_password.setCustomValidity(confirm_password.value != password.value ? "Passwords do not match." : "")'><%= form_tag "/users", method: :post do%>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label class="col-sm-2 col-form-label"><%= label_tag :name %></label>
-      <%= text_field_tag :name %>
-    </div>
-    <div class="form-group col-md-6">
-      <label class="col-sm-3 col-form-label"><%= label_tag :address %></label>
-      <%= text_field_tag :address %>
-    </div>
+<form action="/register" method=post
+      oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name">
   </div>
-  <div class="row"
-    <div class="col-6">
-      <label><%= label_tag :city %></label>
-      <input class="form-control" type="text"<%= text_field_tag :city, nil, class: "form-control"%>
-    </div>
-    <div class="form-group col-4">
-      <label><%= label_tag :state %></label>
-      <input class="form-control" type="text"<%= text_field_tag :state ,nil, class: "form-control"%>
-    </div>
-    <div class="form-group col-2">
-      <label><%= label_tag :zipcode %></label>
-      <input class="form-control" type="text"<%= text_field_tag :zip %>
-    </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" id="address" name="address">
+  </div>
+  <div class="form-row">
+      <div class="form-group col-sm-6">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" name="city">
+      </div>
+      <div class="form-group col-sm-4">
+          <label for="state">State</label>
+          <input type="text" class="form-control" id="state" name="state">
+      </div>
+      <div class="form-group col-sm-2">
+          <label for="zip">Zip</label>
+          <input type="text" class="form-control" id="zip" name="zip">
+      </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-4">
-      <label><%= label_tag :email %></label>
-      <%= text_field_tag :email %>
+      <label for="username">Email</label>
+      <input type="email" name="email" class="form-control" id="username" placeholder="Email" required name=un>
     </div>
     <div class="form-group col-md-4">
-      <label><%= label_tag :password %></label>
-      <%= password_field_tag :password %>
+      <label for="password">Password</label>
+      <input id="password" type=password required name=password class="form-control" placeholder="Password">
     </div>
     <div class="form-group col-md-4">
-      <label><%= label_tag "Confirm Password" %></label>
-      <input type=password name=confirm_password class="form-control" />
+      <label for="password2">Confirm password</label>
+      <input id="password2" type=password name=confirm_password class="form-control" placeholder="Confirm">
     </div>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= submit_tag "Create Account"%>
-    <%end %>
+    <input type=submit value="Create Account">
   </div>
 </form>
