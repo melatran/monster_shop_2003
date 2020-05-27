@@ -34,7 +34,7 @@ RSpec.describe "User Registration" do
     fill_in :password, with: password
 
     click_on "Create Account"
-    save_and_open_page
+
     expect(page).to have_content("Email has already been taken")
     expect(page).to_not have_content("spiderqueen@hotmail.com")
   end
