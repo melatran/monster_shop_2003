@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
   resources :merchants do
     resources :items, only: [:index, :new, :create]
   end
@@ -29,6 +28,6 @@ Rails.application.routes.draw do
   get "/profile", to: 'profile#index'
 
   get "/login", to: 'login#index'
-
-
+  get "/login", to: 'sessions#new'
+  post "/login", to: 'sessions#create'
 end
