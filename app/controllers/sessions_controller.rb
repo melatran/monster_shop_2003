@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome, #{user.name}"
     else
       flash[:error] = "Invalid Credentials. Please Try Again"
-      render :new
+      redirect_to "/login"
     end
   end
 
