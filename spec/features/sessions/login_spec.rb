@@ -110,13 +110,3 @@ RSpec.describe "Logging In" do
     expect(page).to have_content("Invalid Credentials. Please Try Again")
   end
 end
-
-
-# User Story 14, User cannot log in with bad credentials
-#
-# As a visitor
-# When I visit the login page ("/login")
-# And I submit invalid information
-# Then I am redirected to the login page
-# And I see a flash message that tells me that my credentials were incorrect
-# I am NOT told whether it was my email or password that was incorrect
