@@ -78,8 +78,45 @@ RSpec.describe "Logging In" do
       fill_in :password, with: user.password
 
       click_button "Login"
-      
+
       expect(current_path).to eq('/admin/dashboard')
       expect(page).to have_content("Welcome, #{user.name}")
   end
+
+  it "cannot login a user with invalid credentials" do
+
+    user = User.create(name: "Natasha Romanoff",
+      address: "890 Fifth Avenue",
+      city: "Manhattan",
+      state: "New York",
+      zip: "10010",
+      email: "spiderqueen@hotmail.com",
+      password: "arrow",
+      role: 0)
+
+    visit "/merchants"
+
+    within 'nav' do
+      click_link "Login"
+    end
+
+    expect(current_path).to eq('/login')
+
+    fill_in :username, with: user.email
+    fill_in :password, with: "password"
+
+    click_button "Login"
+
+    expect(page).to have_content("Invalid Credentials. Please Try Again")
+  end
 end
+
+
+# User Story 14, User cannot log in with bad credentials
+#
+# As a visitor
+# When I visit the login page ("/login")
+# And I submit invalid information
+# Then I am redirected to the login page
+# And I see a flash message that tells me that my credentials were incorrect
+# I am NOT told whether it was my email or password that was incorrect
