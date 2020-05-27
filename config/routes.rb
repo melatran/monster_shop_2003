@@ -20,7 +20,6 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
-  resources :register, exclude: [:new, :index, :edit, :update, :destroy]
 
   get "/register", to: "users#new"
   post "/register", to: 'users#create'
