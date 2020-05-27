@@ -11,7 +11,7 @@ RSpec.describe "Logging In" do
       password: "arrow")
   end
 
-  it "can log in with valid credentials" do
+  it "can log in with valid credentials as a user" do
 
     visit "/merchants"
 
@@ -24,8 +24,10 @@ RSpec.describe "Logging In" do
     fill_in :username, with: @user.email
     fill_in :password, with: @user.password
 
-    click_link "Login"
+    click_button "Login"
+  
     expect(current_path).to eq('/profile')
+
     expect(page).to have_content("Welcome, #{@user.name}")
   end
 end
