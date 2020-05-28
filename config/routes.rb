@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :items, only: [:index, :show, :edit, :destroy, :update]
-  
+
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"
 
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   post "/register", to: 'users#create'
 
   post "/users", to: "users#create"
-  
+
   get "/login", to: 'sessions#new'
   post '/login', to: 'sessions#create'
 
@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   namespace :default_user do
     get "/profile", to: 'profile#index'
+    get "/profile/edit", to: 'profile#edit'
+    patch "/profile", to: 'profile#update'
   end
 
   namespace :merchant do
