@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "welcome#index"
+
   get "/register", to: "users#new"
   post "/users", to: "users#create"
 
@@ -38,10 +40,16 @@ Rails.application.routes.draw do
 
   get "/register", to: 'users#new'
   post "/register", to: 'users#create'
-
-  get "/profile", to: 'profile#index'
-
+  
   get "/login", to: 'login#index'
+  
+  namespace :default_user do 
+    get "/profile", to: 'profile#index'
+  end 
+
+  namespace :admin do 
+    get "/dashboard", to: "dashboard#index"
+  end
 
 
 end
