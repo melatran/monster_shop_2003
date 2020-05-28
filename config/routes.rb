@@ -25,24 +25,15 @@ Rails.application.routes.draw do
   post "/register", to: 'users#create'
 
   post "/users", to: "users#create"
-
+  
   get "/login", to: 'sessions#new'
-  post "/login", to: 'sessions#create'
+  post '/login', to: 'sessions#create'
 
   delete "/logout", to: 'sessions#destroy'
 
   namespace :default_user do
     get "/profile", to: 'profile#index'
   end
-
-  namespace :merchant do
-    get '/dashboard', to: 'dashboard#index'
-  end
-
-  get "/profile", to: 'profile#index'
-
-  get "/login", to: 'sessions#new'
-  post '/login', to: 'sessions#create'
 
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index'
