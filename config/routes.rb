@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :items, only: [:index, :new, :create]
   end
-  
+
   resources :items, only: [:index, :show, :edit, :destroy, :update]
 
 
@@ -25,14 +25,23 @@ Rails.application.routes.draw do
   post "/register", to: 'users#create'
 
   post "/users", to: "users#create"
-  
+
   get "/login", to: 'sessions#new'
   post "/login", to: 'sessions#create'
-  
-  namespace :default_user do 
+
+  namespace :default_user do
     get "/profile", to: 'profile#index'
   end
-  
+
+  namespace :merchant do
+    get '/dashboard', to: 'dashboard#index'
+  end
+
+  get "/profile", to: 'profile#index'
+
+  get "/login", to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index'
   end
@@ -40,5 +49,5 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
   end
-  
+
 end

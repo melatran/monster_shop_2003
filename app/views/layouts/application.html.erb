@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <nav class = "topnav">    
+    <nav class = "topnav">
       <%= link_to "Home", "/" %>
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
@@ -17,9 +17,9 @@
       <% if current_user.nil? %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Login", "/login" %>
-        <%= link_to "Register", "/register" %>  
+        <%= link_to "Register", "/register" %>
 
-      <% elsif current_user.default? %>  
+      <% elsif current_user.default? %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Logout", "/logout"%>
         <%= link_to "User Profile", "/default_user/profile"%>
