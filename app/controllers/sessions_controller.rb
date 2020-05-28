@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
   end
-
+  
   def create
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome, #{user.name}"
     else
       flash[:error] = "Invalid Credentials. Please Try Again"
-      render :new
+      redirect_to "/login"
     end
   end
 
