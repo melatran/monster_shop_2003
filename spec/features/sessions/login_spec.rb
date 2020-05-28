@@ -47,6 +47,34 @@ RSpec.describe "Logging In" do
 
           expect(page).to have_content("The page you were looking for doesn't exist.")
       end
+
+      it "redirects if user is logged in already" do
+
+        user = User.create(name: "Natasha Romanoff",
+          address: "890 Fifth Avenue",
+          city: "Manhattan",
+          state: "New York",
+          zip: "10010",
+          email: "spiderqueen@hotmail.com",
+          password: "arrow",
+          role: 0)
+
+          visit "/merchants"
+
+          within 'nav' do
+            click_link "Login"
+          end
+
+          fill_in :username, with: user.email
+          fill_in :password, with: user.password
+
+          click_button "Login"
+
+          visit "/login"
+
+          expect(current_path).to eq("/default_user/profile")
+          expect(page).to have_content("You are already logged in")
+      end
   end
 
   describe "Merchants Login" do
@@ -92,6 +120,33 @@ RSpec.describe "Logging In" do
 
         expect(page).to have_content("The page you were looking for doesn't exist.")
     end
+
+    it "redirects if merchant is logged in already" do
+
+      user = User.create(name: "Bucky Barnes",
+        address: "890 Fifth Avenue",
+        city: "Manhattan",
+        state: "New York",
+        zip: "10010",
+        email: "wintersoldier@hotmail.com",
+        password: "america",
+        role: 1)
+
+        visit "/merchants"
+
+        within 'nav' do
+          click_link "Login"
+        end
+
+        fill_in :username, with: user.email
+        fill_in :password, with: user.password
+
+        click_button "Login"
+
+        visit "/login"
+        expect(current_path).to eq("/merchant/dashboard")
+        expect(page).to have_content("You are already logged in")
+    end
   end
 
   describe "Admin Login" do
@@ -136,6 +191,33 @@ RSpec.describe "Logging In" do
         visit "/merchant/dashboard"
 
         expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
+
+    it "redirects admin to admin dashboard if already logged in" do
+
+      user = User.create(name: "Blair Waldor",
+        address: "1136 Fifth Avenue",
+        city: "Manhattan",
+        state: "New York",
+        zip: "10010",
+        email: "gossipgirl@hotmail.com",
+        password: "xoxo",
+        role: 2)
+
+        visit "/merchants"
+
+        within 'nav' do
+          click_link "Login"
+        end
+
+        fill_in :username, with: user.email
+        fill_in :password, with: user.password
+
+        click_button "Login"
+
+        visit "/login"
+        expect(current_path).to eq('/admin/dashboard')
+        expect(page).to have_content("You are already logged in")
     end
   end
 
