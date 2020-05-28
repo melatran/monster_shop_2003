@@ -6,9 +6,10 @@ class User < ApplicationRecord
                           :state,
                           :zip
 
-    validates_presence_of :password, require: true
+    validates_presence_of :password, require: true, :on => :create
 
     has_secure_password
 
     enum role: {default: 0, merchant: 1, admin: 2}
+
 end
