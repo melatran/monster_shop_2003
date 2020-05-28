@@ -14,7 +14,7 @@ class ReviewsController<ApplicationController
       review = @item.reviews.create(review_params)
       if review.save
         flash[:success] = "Review successfully created"
-        redirect_to "/items/#{@item.id}"
+        redirect_to item_path(@item)
       else
         flash[:error] = "Rating must be between 1 and 5"
         render :new
