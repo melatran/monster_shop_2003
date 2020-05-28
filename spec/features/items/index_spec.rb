@@ -57,5 +57,18 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
     end
+
+    xit "All item images are links to item show-page" do
+      visit '/items'
+
+      within "#item-#{@dog_bone.id}" do
+        find(:xpath, "//a/img[@alt=‘4e1f5b05 27ef 4267 bb9a 14e35935f218?size=784x588’]/..").click
+      end
+        # expect(page).to have_content("img[src*='#{@dog_bone.image}']")
+      # end
+      # expect(page).to have_link(@pull_toy.image)
+      # expect(page).to have_link(@dog_bone.image)
+    end
+
   end
 end
