@@ -26,7 +26,7 @@ RSpec.describe "Logging In" do
 
         click_button "Login"
 
-        expect(current_path).to eq('/profile')
+        expect(current_path).to eq('/default_user/profile')
 
         expect(page).to have_content("Welcome, #{user.name}")
       end

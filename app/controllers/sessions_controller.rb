@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def type_of_login(user)
     if user.default?
-      redirect_to '/profile'
+      redirect_to '/default_user/profile'
     elsif user.merchant?
       redirect_to '/merchant/dashboard'
     elsif user.admin?
