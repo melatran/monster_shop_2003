@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'As a default user' do
+RSpec.describe 'As a merchant user' do
     describe 'site navigation' do
-        it 'I am not able to access any path that begins with /merchant, or /admin' do
+        it 'I am not able to access any path that begins with /admin' do
 
             employee = User.create(name: "Employee user",
                                        address: "99 Working Hard Lane",
