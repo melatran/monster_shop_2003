@@ -10,7 +10,8 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
         flash[:notice] = "You are now registered and logged in"
-          redirect_to "/profile"
+        session[:user_id] = @user.id
+        redirect_to "/default_user/profile"
       else
           flash[:error] = @user.errors.full_messages.to_sentence
           render :new
