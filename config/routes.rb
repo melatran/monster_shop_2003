@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :items, only: [:index, :show, :edit, :destroy, :update]
-
-
+  
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"
 

@@ -21,7 +21,7 @@ class ItemsController<ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     item = @merchant.items.create(item_params)
     if item.save
-      redirect_to "/merchants/#{@merchant.id}/items"
+      redirect_to merchant_items_path(@merchant)
     else
       flash[:error] = item.errors.full_messages.to_sentence
       render :new
@@ -36,7 +36,7 @@ class ItemsController<ApplicationController
     @item = Item.find(params[:id])
     @item.update(item_params)
     if @item.save
-      redirect_to "/items/#{@item.id}"
+      redirect_to item_path(@item)
     else
       flash[:error] = @item.errors.full_messages.to_sentence
       render :edit
@@ -47,7 +47,7 @@ class ItemsController<ApplicationController
     item = Item.find(params[:id])
     Review.where(item_id: item.id).destroy_all
     item.destroy
-    redirect_to "/items"
+    redirect_to items_path
   end
 
   private

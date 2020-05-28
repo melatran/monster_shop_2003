@@ -22,18 +22,18 @@ class SessionsController < ApplicationController
   def destroy
     session.destroy
     flash[:notice] = "You have been logged out"
-    redirect_to "/"
+    redirect_to root_path
   end
 
   private
 
   def type_of_login(user)
     if user.default?
-      redirect_to '/default_user/profile'
+      redirect_to default_user_profile_path
     elsif user.merchant?
-      redirect_to '/merchant/dashboard'
+      redirect_to merchant_dashboard_path
     elsif user.admin?
-      redirect_to '/admin/dashboard'
+      redirect_to admin_dashboard_path
     end
   end
 
