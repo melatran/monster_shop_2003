@@ -8,6 +8,10 @@ class CartController < ApplicationController
 
   def show
     @items = cart.items
+    if current_admin?
+      flash[:error] = "This page does not exist for you"
+      redirect_to "/admin/dashboard"
+    end    
   end
 
   def empty
