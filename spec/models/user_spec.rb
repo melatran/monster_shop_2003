@@ -25,48 +25,36 @@ RSpec.describe User, type: :model do
 
         expect(user.role).to eq("default")
         expect(user.default?).to be_truthy
-      end
+     end
 
-      it "can be created as a merchant user" do
+   it "can be created as a merchant user" do
 
-        user = User.create(name: "Bucky Barnes",
-          address: "126 Fifth Avenue",
-          city: "Queens",
-          state: "New York",
-          zip: "10010",
-          email: "wintersoldier@hotmail.com",
-          password: "america",
-          role: 1)
+      user = User.create(name: "Bucky Barnes",
+        address: "126 Fifth Avenue",
+        city: "Queens",
+        state: "New York",
+        zip: "10010",
+        email: "wintersoldier@hotmail.com",
+        password: "america",
+        role: 1)
 
-        expect(user.role).to eq("merchant")
-        expect(user.merchant?).to be_truthy
-      end
+      expect(user.role).to eq("merchant")
+      expect(user.merchant?).to be_truthy
+    end
 
-      it "can be created as a merchant user" do
+    it "can create an admin user" do
 
-        user = User.create(name: "Blair Waldor",
-          address: "1136 Fifth Avenue",
-          city: "Manhattan",
-          state: "New York",
-          zip: "10010",
-          email: "gossipgirl@hotmail.com",
-          password: "xoxo",
-          role: 2)
+        admin_user = User.create(name: "Admin user",
+                            address: "123 Admin Way",
+                            city: "New York City",
+                            state: "New York",
+                            zip: "01020",
+                            email: "admin_email@gmail.com",
+                            password: "admin_password",
+                            role: 2)
 
-        expect(user.role).to eq("admin")
-        expect(user.admin?).to be_truthy
-      end
-  end
-
+        expect(admin_user.role).to eq("admin")
+        expect(admin_user.admin?).to be_truthy
+     end 
 end
-
-
-#   it "can be created as a default user" do
-#     user = User.create(username: "sammy",
-#                        password: "pass",
-#                        role: 0)
-#
-#     expect(user.role).to eq("default")
-#     expect(user.default?).to be_truthy
-#   end
-# end
+end 
