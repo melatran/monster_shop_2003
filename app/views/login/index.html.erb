@@ -1,0 +1,14 @@
+<form action="/login" method=post >
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <label for="username">Email</label>
+    <input type="email" name="email" class="form-control" id="username" placeholder="Email" required name=un>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="password">Password</label>
+    <input id="password" type=password required name=password class="form-control" placeholder="Password">
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type=submit value="Login">
+</div>
+</form>

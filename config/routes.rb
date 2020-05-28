@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "welcome#index"
 
-
   resources :merchants do
     resources :items, only: [:index, :new, :create]
   end
+  
   resources :items, only: [:index, :show, :edit, :destroy, :update]
 
 
@@ -21,21 +21,24 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
-
   get "/register", to: "users#new"
   post "/register", to: 'users#create'
 
   post "/users", to: "users#create"
 
-  get "/login", to: 'login#index'
+  get "/login", to: 'sessions#new'
+  post "/login", to: 'sessions#create'
   
   namespace :default_user do 
     get "/profile", to: 'profile#index'
-  end 
-
-  namespace :admin do 
-    get "/dashboard", to: "dashboard#index"
+  end
+  
+  namespace :merchant do
+    get '/dashboard', to: 'dashboard#index'
   end
 
-
+  namespace :admin do
+    get '/dashboard', to: 'dashboard#index'
+  end
+  
 end
