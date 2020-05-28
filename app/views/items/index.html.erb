@@ -4,6 +4,19 @@
 <% else %>
   <h1>All Items</h1>
 <% end %>
+
+<section id="statistics">
+  <section id="most-popular">
+    <h3><b> Most Popular Sold Items</b></h3>
+
+  </section>
+
+  <section id="least-popular">
+    <h3><b> Least Sold Items</b></h3>
+
+  </section>
+</section>
+
 <section class="grid-container">
   <% @items.each do |item| %>
     <section class = "grid-item" id= 'item-<%=item.id%>'>
