@@ -6,8 +6,6 @@ class DefaultUser::ProfileController < DefaultUser::BaseController
     def edit
       if params[:pw] == "change"
         @var = 1
-      else
-        @var = 0
       end
     end
 

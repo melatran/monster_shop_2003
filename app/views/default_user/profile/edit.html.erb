@@ -1,4 +1,4 @@
-<% if @var == 0 %>
+<% if @var != 1 %>
   <%= form_tag "/default_user/profile", method: :patch do %>
     <%= label_tag :name %>
     <%= text_field_tag :name, current_user.name%>
@@ -20,15 +20,14 @@
 
     <%= submit_tag "Submit update" %>
   <% end %>
-
-<%elsif @var ==  1 %>
-  <%= form_tag "/default_user/profile?pw=changed", method: :patch do %>
-    <%= label_tag "Password" %>
-    <%= password_field_tag :password %>
-
-    <%= label_tag "Confirm Password"  %>
-    <%= password_field_tag :password_confirmation%>
-
-    <%= submit_tag "Update Password" %>
-  <%end%>
 <% end %>
+
+<%= form_tag "/default_user/profile?pw=changed", method: :patch do %>
+  <%= label_tag "Password" %>
+  <%= password_field_tag :password %>
+
+  <%= label_tag "Confirm Password"  %>
+  <%= password_field_tag :password_confirmation%>
+
+  <%= submit_tag "Update Password" %>
+<%end%>

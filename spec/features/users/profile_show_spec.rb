@@ -47,7 +47,28 @@ RSpec.describe "When i visit my proile page" do
       click_on "Update Password"
       expect(current_path).to eq(default_user_profile_path)
       expect(page).to have_content("Your password has been updated")
-
   end
+
+  it 'gives an error if password and password confirmation don not match' do
+
+    default_user = User.create(name: "Natasha Romanoff",
+      address: "890 Fifth Avenue",
+      city: "Manhattan",
+      state: "New York",
+      zip: "10010",
+      email: "spiderqueen@hotmail.com",
+      password: "arrow",
+      role: 0)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+    visit default_user_profile_edit_path
+
+    fill_in :password, with: "bow"
+    fill_in :password_confirmation, with: "bows"
+    click_on "Update Password"
+    expect(current_path).to eq(default_user_profile_edit_path)
+    expect(page).to have_content("Password and confirmation password need to match")
+  end 
 
 end

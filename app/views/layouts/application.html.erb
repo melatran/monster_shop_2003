@@ -18,10 +18,10 @@
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Login", "/login" %>
         <%= link_to "Register", "/register" %>
-        
+
       <% elsif current_user.default? %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
-        <%= link_to "Logout", "/logout", method: :delete%>
+        <%= link_to "Logout", "/logout" %>
         <%= link_to "User Profile", "/default_user/profile"%>
 
       <% elsif current_user.merchant? %>
