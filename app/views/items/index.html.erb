@@ -7,13 +7,21 @@
 
 <section id="statistics">
   <section id="most-popular">
-    <h3><b> Most Popular Sold Items</b></h3>
-
+    <h3><b> Most Popular Items</b></h3>
+      <ol type = "1">
+        <% @items.popularity("desc").each do |item| %>
+            <li><%= "#{item.name}"%> : <%="#{item.total_quantity}" %> sold </li>
+        <% end %>
+      </ol>
   </section>
 
   <section id="least-popular">
-    <h3><b> Least Sold Items</b></h3>
-
+    <h3><b> Least Popular Items</b></h3>
+      <ol type = "1">
+        <% @items.popularity("asc").each do |item| %>
+            <li><%= "#{item.name}"%> : <%="#{item.total_quantity}" %> sold </li>
+        <% end %>
+      </ol>
   </section>
 </section>
 
