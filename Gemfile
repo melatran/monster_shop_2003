@@ -28,6 +28,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem "nyan-cat-formatter"
+  gem "orderly"
 end
 
 group :development do
