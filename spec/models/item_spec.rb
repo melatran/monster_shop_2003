@@ -94,8 +94,6 @@ describe Item, type: :model do
       journal = shop1.items.create(name: "Bullet Journal", description: "DIY Planner", price: 2, image: "https://images-na.jpg", inventory: 200)
       fan = shop1.items.create(name: "Personal Fan", description: "Cool Down Whenever", price: 35, image: "https://images-na.jpg", inventory: 100)
 
-      user = User.create(name: "Natasha Romanoff", address: "890 Fifth Avenue", city: "Manhattan", state: "New York", zip: "10010", email: "spiderqueen@hotmail.com", password: "arrow",role: 0)
-
       order_1 = Order.create(name: 'Hyram', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
 
       ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 20, order_id: order_1.id)
