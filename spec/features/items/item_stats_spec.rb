@@ -33,7 +33,6 @@ RSpec.describe "Items Index Stats Section" do
 
     visit "/items"
 
-    save_and_open_page
     within "#most-popular" do
       expect(album.name).to appear_before(journal.name)
       expect(journal.name).to appear_before(ahgabong.name)
