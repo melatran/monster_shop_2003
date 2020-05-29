@@ -13,7 +13,7 @@ RSpec.describe "Items Index Stats Section" do
     dolls = shop2.items.create(name: "All Day6 Member Dolls", description: "Time of your life", price: 600, image: "https://images-na.jpg", inventory: 12)
 
     #Shop 1 items
-    paper = shop1.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://images-na.jpg", inventory: 13)
+    paper = shop1.items.create(name: "Lined Paper", price: 20)
     pencil = shop1.items.create(name: "Yellow Pencil", description: "You can write with it!", price: 2, image: "https://images-na.jpg", inventory: 100)
     journal = shop1.items.create(name: "Bullet Journal", description: "DIY Planner", price: 2, image: "https://images-na.jpg", inventory: 200)
     fan = shop1.items.create(name: "Personal Fan", description: "Cool Down Whenever", price: 35, image: "https://images-na.jpg", inventory: 100)
@@ -22,31 +22,35 @@ RSpec.describe "Items Index Stats Section" do
 
     order_1 = Order.create(name: 'Hyram', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
 
-    item_order1 = ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 20, order_id: order_1.id)
-    item_order2 = ItemOrder.create(item: ahgabong, price: ahgabong.price, quantity: 30, order_id: order_1.id)
-    item_order3 = ItemOrder.create(item: album, price: album.price, quantity: 80, order_id: order_1.id)
-    item_order4 = ItemOrder.create(item: ahgabong, price: ahgabong.price, quantity: 25, order_id: order_1.id)
-    item_order5 = ItemOrder.create(item: journal, price: journal.price, quantity: 70, order_id: order_1.id)
-    item_order6 = ItemOrder.create(item: dolls, price: dolls.price, quantity: 10, order_id: order_1.id)
-    item_order7 = ItemOrder.create(item: fan, price: fan.price, quantity: 1, order_id: order_1.id)
-    item_order8 = ItemOrder.create(item: paper, price: paper.price, quantity: 2, order_id: order_1.id)
+    ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 20, order_id: order_1.id)
+    ItemOrder.create(item: ahgabong, price: ahgabong.price, quantity: 55, order_id: order_1.id)
+    ItemOrder.create(item: album, price: album.price, quantity: 80, order_id: order_1.id)
+    ItemOrder.create(item: journal, price: journal.price, quantity: 70, order_id: order_1.id)
+    ItemOrder.create(item: dolls, price: dolls.price, quantity: 10, order_id: order_1.id)
+    ItemOrder.create(item: fan, price: fan.price, quantity: 2, order_id: order_1.id)
+    ItemOrder.create(item: paper, price: paper.price, quantity: 3, order_id: order_1.id)
+    ItemOrder.create(item: pencil, price: pencil.price, quantity: 1, order_id: order_1.id)
 
     visit "/items"
 
+    save_and_open_page
     within "#most-popular" do
       expect(album.name).to appear_before(journal.name)
       expect(journal.name).to appear_before(ahgabong.name)
       expect(ahgabong.name).to appear_before(cardboard.name)
       expect(cardboard.name).to appear_before(dolls.name)
       expect(page).to_not have_content(fan.name)
+
+      expect(page).to have_content("Super Junior Time Slip : 80 sold")
     end
 
     within "#least-popular" do
       expect(pencil.name).to appear_before(fan.name)
-      expect(fan.name).to appear_before(paper.name)
-      expect(paper.name).to appear_before(dolls.name)
+      expect(fan.name).to appear_before(dolls.name)
       expect(dolls.name).to appear_before(cardboard.name)
+      expect(cardboard.name).to appear_before(ahgabong.name)
       expect(page).to_not have_content(album.name)
+      expect(page).to have_content("Yellow Pencil : 1 sold")
     end
   end
 end
