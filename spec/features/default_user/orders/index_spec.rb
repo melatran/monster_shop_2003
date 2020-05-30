@@ -19,7 +19,7 @@ RSpec.describe "Default User's Profile Orders Page" do
 
        click_on "My Orders"
 
-       expect(current_path).to eq("/default_user/profile/orders")
+       expect(current_path).to eq(default_user_profile_orders_path)
      end
 
      it "I cannot see a link to My Orders when I haven't placed an order" do
@@ -33,11 +33,13 @@ RSpec.describe "Default User's Profile Orders Page" do
      end
 
      it "I can see a list of every order I've made" do
+       #The show page template for an order can be shared between users, merchants and admins to DRY up our presentation logic. They will operate through separate controllers, though.
+
        #created_at(date order was made)
        #updated_at(date order was last updated)
        #status made in user story 26(so will ignore for now)
-       #total_quantity method in orders controller
-       #grand_total method already in orders
+       #total_quantity method in orders controller [X]
+       #grand_total method already in orders [X]
        shop = Merchant.create(name: "K-Pop Black Market", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
        cardboard = shop.items.create(name: "EXO Kai Cardboard", description: "Just a cutout", price: 100, image: "https://images-na.jpg", inventory: 20)
 
@@ -49,7 +51,7 @@ RSpec.describe "Default User's Profile Orders Page" do
        ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 2, order_id: order1.id)
        ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 3, order_id: order2.id)
 
-       visit "default_user/profile/orders"
+       visit default_user_profile_orders_path
 
        within ".orders-#{order1.id}" do
          expect(page).to have_link(order1.id)
@@ -74,9 +76,8 @@ RSpec.describe "Default User's Profile Orders Page" do
    end
 end
 
-#
 # User Story 28, User Profile displays Orders
-#
+
 # As a registered user
 # When I visit my Profile Orders page, "/profile/orders"
 # I see every order I've made, which includes the following information:

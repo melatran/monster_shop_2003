@@ -1,4 +1,4 @@
-class DefaultUser::OrdersController < Merchant::BaseController
+class DefaultUser::OrdersController < DefaultUser::BaseController
 
   def index
   end
