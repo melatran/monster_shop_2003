@@ -57,5 +57,11 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
     end
+    it "the user can click on the item image and it goes to the show page" do
+      visit "/items"
+
+      page.first(:xpath, "//a[contains(@href,'items/#{@dog_bone.id}')]")
+      expect(current_path).to eq("/items/#{@dog_bone.id}")
+    end
   end
 end
