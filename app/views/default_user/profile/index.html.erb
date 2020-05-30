@@ -6,4 +6,4 @@
 <p><%= current_user.zip %></p>
 <p><%= current_user.email %></p>
 
-<p><%= link_to "My Orders", "/default_user/profile/orders" %></p>
+<p><%= link_to "My Orders", "/default_user/profile/orders" unless current_user.orders.empty? %></p>
