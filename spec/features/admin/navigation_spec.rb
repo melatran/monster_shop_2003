@@ -25,7 +25,7 @@ RSpec.describe 'As an admin user' do
                   
         end 
 
-        it "when I visit /merchants index page and I click on a merchants name I am taken to '/admin/merchants/:merchant_id' and I see everything the that merchant user does" do
+        it "when I visit merchants index page and I click on a merchants name I am taken to '/admin/merchants/:merchant_id' and I see everything the that merchant user does" do
             
             bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
             employee = bike_shop.users.create!(name: "Employee user",
@@ -36,6 +36,7 @@ RSpec.describe 'As an admin user' do
                                        email: "employee_email@gmail.com",
                                        password: "employee_password",
                                        role: 1) 
+
             admin = User.create(name: "Admin user",
                                        address: "123 Boss Rd",
                                        city: "Denver",
@@ -52,6 +53,12 @@ RSpec.describe 'As an admin user' do
             click_link "Meg's Bike Shop"
 
             expect(current_path).to eq("/admin/merchants/#{bike_shop.id}")
+            expect(page).to have_content(bike_shop.name)
+            expect(page).to have_content(bike_shop.address)
+            expect(page).to have_content(bike_shop.city)
+            expect(page).to have_content(bike_shop.state)
+            expect(page).to have_content(bike_shop.zip)
+            expect(page).to have_link("View items sold by #{bike_shop.name}")
         end
     end 
 end 
