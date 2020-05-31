@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Cart show' do
+RSpec.describe 'Cart show page' do
   describe 'When I have added items to my cart' do
     before(:each) do
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -52,6 +52,22 @@ RSpec.describe 'Cart show' do
         click_button "Add one more.."
         expect(page).to_not have_button("Add one more..")
       end 
+
+    end
+
+    it "I see a button next to each item that allows me to subtract one of that item until none are left in the cart" do
+
+      visit "/cart"
+
+      expect(page).to have_content("Cart: 3")
+      
+      within "#cart-item-#{@paper.id}" do
+        click_button "Remove one.."
+      end 
+      
+      expect(page).to_not have_link("#{@paper.name}")
+      expect(page).to have_link("#{@tire.name}")
+      expect(page).to have_link("#{@pencil.name}")
 
     end
   end
