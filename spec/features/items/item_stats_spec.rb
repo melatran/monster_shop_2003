@@ -20,7 +20,7 @@ RSpec.describe "Items Index Stats Section" do
 
     user = User.create(name: "Natasha Romanoff", address: "890 Fifth Avenue", city: "Manhattan", state: "New York", zip: "10010", email: "spiderqueen@hotmail.com", password: "arrow",role: 0)
 
-    order_1 = Order.create(name: 'Hyram', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+    order_1 = Order.create(name: 'Hyram', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: user.id)
 
     ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 20, order_id: order_1.id)
     ItemOrder.create(item: ahgabong, price: ahgabong.price, quantity: 55, order_id: order_1.id)
