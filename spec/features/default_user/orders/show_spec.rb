@@ -28,6 +28,7 @@ RSpec.describe "Order Show Page" do
       expect(page).to have_content("Last Updated: #{update1}")
       expect(page).to have_content("Status: #{order.status}")
       expect(page).to have_content("2")
+      expect(page).to have_content("unfulfilled")
       expect(page).to have_content("$2,090.00")
       expect(page).to have_content("EXO Kai Cardboard")
       expect(page).to have_content("Just a cutout")
