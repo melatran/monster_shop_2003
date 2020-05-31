@@ -15,4 +15,8 @@ class User < ApplicationRecord
 
     enum role: {default: 0, merchant: 1, admin: 2}
 
+    def items_sold
+      merchant.items
+    end 
+
 end
