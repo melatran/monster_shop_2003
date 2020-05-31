@@ -79,8 +79,8 @@ RSpec.describe "Logging In" do
 
   describe "Merchants Login" do
     it "can log in with valid credentials as a merchant" do
-
-      user = User.create(name: "Bucky Barnes",
+      bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      user = bike_shop.users.create!(name: "Bucky Barnes",
         address: "890 Fifth Avenue",
         city: "Manhattan",
         state: "New York",
@@ -122,8 +122,8 @@ RSpec.describe "Logging In" do
     end
 
     it "redirects if merchant is logged in already" do
-
-      user = User.create(name: "Bucky Barnes",
+      bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      user = bike_shop.users.create(name: "Bucky Barnes",
         address: "890 Fifth Avenue",
         city: "Manhattan",
         state: "New York",

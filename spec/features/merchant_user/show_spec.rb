@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'As a merchant user' do
-    describe 'site navigation' do
-        it 'I am not able to access any path that begins with /admin' do
-            bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+RSpec.describe "As a merchant employee user" do
+    describe "when I visit my merchant dashboard" do
+        it "I see the name and full address of the merchant that I work for" do
+
+            bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
             employee = bike_shop.users.create!(name: "Employee user",
                                        address: "99 Working Hard Lane",
                                        city: "Los Angeles",
@@ -15,10 +16,10 @@ RSpec.describe 'As a merchant user' do
                                 
             allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(employee)  
 
-            visit '/admin/dashboard' 
+            visit "/merchant/dashboard"
 
-            expect(page).to have_content("The page you were looking for doesn't exist.")
-                  
-        end 
-    end 
-end 
+            expect(page).to have_content("#{bike_shop.name}")
+
+        end
+    end
+end

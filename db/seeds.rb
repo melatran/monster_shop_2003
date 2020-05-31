@@ -30,6 +30,15 @@ default_user = User.create(name: "Default user",
                                        password: "default_password",
                                        role: 0)
 
+employee = bike_shop.users.create!(name: "Employee user",
+                                   address: "99 Working Hard Lane",
+                                   city: "Los Angeles",
+                                   state: "California",
+                                   zip: "90210",
+                                   email: "employee_email@gmail.com",
+                                   password: "employee_password",
+                                   role: 1) 
+
 admin = User.create(name: "Admin user",
                                        address: "123 Boss Rd",
                                        city: "Denver",
