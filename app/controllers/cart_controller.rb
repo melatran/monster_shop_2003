@@ -2,8 +2,13 @@ class CartController < ApplicationController
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)
-    flash[:success] = "#{item.name} was successfully added to your cart"
-    redirect_to items_path
+    if params[:do] == "one_more"
+      flash[:success] = "You've added one more #{item.name} to your cart"
+      redirect_to "/cart"
+    else
+      flash[:success] = "#{item.name} was successfully added to your cart"
+      redirect_to items_path
+    end 
   end
 
   def show

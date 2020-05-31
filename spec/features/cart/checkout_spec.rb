@@ -27,6 +27,33 @@ RSpec.describe 'Cart show' do
 
       expect(current_path).to eq("/orders/new")
     end
+
+    it "I see a button next to each item that allows me to add one more of that item until item's inventory is reached" do
+
+      visit "/cart"
+
+      expect(page).to have_content("Cart: 3")
+
+      within "#cart-item-#{@tire.id}" do
+        click_button "Add one more.."
+      end 
+
+      expect(page).to have_content("You've added one more #{@tire.name} to your cart") 
+      expect(page).to have_content("Cart: 4") 
+      
+      within "#cart-item-#{@paper.id}" do
+        click_button "Add one more.."
+      end 
+      
+      expect(page).to have_content("You've added one more #{@paper.name} to your cart") 
+      expect(page).to have_content("Cart: 5") 
+      
+      within "#cart-item-#{@paper.id}" do
+        click_button "Add one more.."
+        expect(page).to_not have_button("Add one more..")
+      end 
+
+    end
   end
 
   describe 'When I havent added items to my cart' do
