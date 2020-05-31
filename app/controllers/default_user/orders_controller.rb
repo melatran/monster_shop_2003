@@ -7,4 +7,9 @@ class DefaultUser::OrdersController < DefaultUser::BaseController
   def show
     @order =  current_user.orders.find(params[:id])
   end
+
+  def update
+    flash[:notice] = "Your Order Has Been Cancelled"
+    redirect_to default_user_profile_path
+  end
 end
