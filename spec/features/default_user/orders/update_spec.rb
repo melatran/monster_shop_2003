@@ -23,10 +23,25 @@ RSpec.describe "Cancelling An Order" do
     expect(current_path).to eq(default_user_profile_path)
   end
 
-  
+  it "when I cancel an order, the status of my items and order are changed" do
+
+    visit "/default_user/profile/orders/#{@order.id}"
+
+    expect(page).to have_content("Status: pending")
+    expect(page).to have_content("fulfilled")
+
+    click_link "Cancel Order"
+
+    visit "/default_user/profile/orders/#{@order.id}"
+
+    expect(page).to have_content("unfulfilled")
+    expect(page).to have_content("Status: cancelled")
+
+    visit default_user_profile_orders_path
+
+    expect(page).to have_content("Status: cancelled")
+  end
 end
-
-
 
 
 # User Story 30, User cancels an order
