@@ -2,6 +2,8 @@ class Merchant <ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :item_orders, through: :items
 
+  has_many :users
+
   validates_presence_of :name,
                         :address,
                         :city,

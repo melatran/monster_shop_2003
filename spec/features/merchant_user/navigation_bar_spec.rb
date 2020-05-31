@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'As an merchant employee user' do
     describe 'in the navigation bar' do
         it 'I see links to home page, items index page, merchants index page, dashboard, logout, and profile page' do
-
-            employee = User.create(name: "Employee user",
+            
+            bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+            employee = bike_shop.users.create(name: "Employee user",
                                        address: "99 Working Hard Lane",
                                        city: "Los Angeles",
                                        state: "California",

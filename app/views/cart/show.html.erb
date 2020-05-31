@@ -32,6 +32,12 @@
         <center>
           <p><%=quantity%></p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
+          <% if cart.contents[item.id.to_s] < item.inventory %>
+            <p><%= button_to "Add one more..", "/cart/#{item.id}?do=one_more", method: :post %></p>
+          <% end %> 
+          <% if cart.contents[item.id.to_s] > 0 %>
+            <p><%= button_to "Remove one..", "/cart/#{item.id}?do=one_less", method: :delete %></p>
+          <%end%>
         </center>
         </td>
       <td>

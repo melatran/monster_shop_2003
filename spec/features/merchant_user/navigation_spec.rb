@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'As a merchant user' do
     describe 'site navigation' do
         it 'I am not able to access any path that begins with /admin' do
-
-            employee = User.create(name: "Employee user",
+            bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+            employee = bike_shop.users.create!(name: "Employee user",
                                        address: "99 Working Hard Lane",
                                        city: "Los Angeles",
                                        state: "California",
