@@ -25,7 +25,16 @@ class CartController < ApplicationController
   end
 
   def remove_item
+    if params[:do] == "one_less" 
+      item = Item.find(params[:item_id])
+      cart.contents[params[:item_id]] -= 1
+      if cart.contents[params[:item_id]] == 0
+        session[:cart].delete(params[:item_id])
+      end 
+      flash[:success] = "You've removed one #{item.name} from your cart"
+    else
     session[:cart].delete(params[:item_id])
+    end
     redirect_to cart_path
   end
 
