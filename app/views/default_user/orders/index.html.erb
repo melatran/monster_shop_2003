@@ -1,8 +1,8 @@
 <h1>History of Your Orders</h1>
 
 <% @orders.each do |order| %>
-  <section class="orders-<%= order.id %>">
-    <b> Order Number: <%= link_to "#{order.id}", "/default_user/profile/orders/#{order.id}" %></b>
+  <section class= "orders-<%= order.id %>" >
+    <b> Order Number: <%= link_to "#{order.id}“, “/default_user/profile/orders/#{order.id}" %></b>
     <p> Order Placed: <%= order.created_at.to_formatted_s(:long) %></p>
     <p> Last Updated: <%= order.updated_at.to_formatted_s(:long) %></p>
     <p> Total Quantity: <%= order.total_quantity %></p>
