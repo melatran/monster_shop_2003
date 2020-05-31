@@ -16,11 +16,11 @@ RSpec.describe "Cancelling An Order" do
   it "I can cancel my order and it will display a flash message" do
 
     visit "/default_user/profile/orders/#{@order.id}"
+    
+    click_link "Cancel Order"
 
-    click_on "Cancel Order"
-
-    expect(current_path).to eq(default_user_profile_path)
     expect(page).to have_content("Your Order Has Been Cancelled")
+    expect(current_path).to eq(default_user_profile_path)
   end
 end
 

@@ -2,7 +2,9 @@
 
 <p> Order Placed: <%= @order.created_at.to_formatted_s(:long) %></p>
 <p> Last Updated: <%= @order.updated_at.to_formatted_s(:long) %></p>
-<p> Status: "pending" </p>
+<p> Status: <%= @order.status %></p>
+
+<button><%= link_to "Cancel Order", default_user_profile_path, method: :put %></button>
 
 <h3 align = "center"> Order Summary </h3>
 <center>
