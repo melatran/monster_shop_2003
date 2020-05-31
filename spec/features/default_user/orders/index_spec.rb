@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Default User's Profile Orders Page" do
- describe "when I visit my profile page" do
      it "shows a link to My Orders when I have placed orders" do
 
        shop = Merchant.create(name: "K-Pop Black Market", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
