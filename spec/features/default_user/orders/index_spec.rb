@@ -54,7 +54,7 @@ RSpec.describe "Default User's Profile Orders Page" do
          expect(page).to have_link("#{order1.id}")
          expect(page).to have_content("Order Placed: #{create1}")
          expect(page).to have_content("Last Updated: #{update1}")
-         # expect(page).to have_content("Status:#{order1.status}")
+         expect(page).to have_content("Status: #{order1.status}")
          expect(page).to have_content("Total Quantity: 2")
          expect(page).to have_content("Grand Total: $200")
          expect(page).to_not have_content("Order Number: #{order2.id}")

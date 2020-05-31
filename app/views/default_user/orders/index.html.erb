@@ -4,6 +4,7 @@
 <% @orders.each do |order| %>
   <section class="orders-<%= order.id %>">
     <b> Order Number: <%= link_to "#{order.id}", "/default_user/profile/orders/#{order.id}" %></b>
+    <p> Status: <%= order.status %></p>
     <p> Order Placed: <%= order.created_at.to_formatted_s(:long) %></p>
     <p> Last Updated: <%= order.updated_at.to_formatted_s(:long) %></p>
     <p> Total Quantity: <%= order.total_quantity %></p>
