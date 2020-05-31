@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
     validates_presence_of :password, require: true, :on => :create 
     validates_confirmation_of :password, :message => "Your email and email confirmation must match"
+
+    belongs_to :merchant, optional: true 
+    
     has_secure_password
 
     enum role: {default: 0, merchant: 1, admin: 2}
