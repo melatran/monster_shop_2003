@@ -39,7 +39,7 @@ RSpec.describe "User can edit their profile data" do
       expect(page).to have_content(default_user.email)
       expect(page).to_not have_content(default_user.password)
   end
-  
+
   it "gives errors if fields not entered" do
     default_user = User.create(name: "Natasha Romanoff",
       address: "890 Fifth Avenue",
@@ -64,7 +64,7 @@ RSpec.describe "User can edit their profile data" do
       expect(page).to have_content("Name can't be blank")
 
     end
-  
+
     it "user can't update profile with an existing email" do
       default_user = User.create(name: "Natasha Romanoff",
         address: "890 Fifth Avenue",
@@ -82,9 +82,11 @@ RSpec.describe "User can edit their profile data" do
         email: "spiderqueen@hotmail.com",
         password: "tony",
         role: 0)
-      
+
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
-      
+
+        visit default_user_profile_path
+        
         click_on("Edit Profile")
         fill_in "Email", with: "spiderqueen@hotmail.com"
         click_on("Submit update")

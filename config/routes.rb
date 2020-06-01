@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get "/profile/edit", to: 'profile#edit'
     patch "/profile", to: 'profile#update'
     get "/profile/orders", to: 'orders#index'
+    get "/profile/orders/:id", to: 'orders#show'
   end
 
   namespace :merchant do
