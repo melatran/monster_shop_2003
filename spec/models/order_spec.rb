@@ -25,7 +25,7 @@ describe Order, type: :model do
 
       @user = User.create(name: "Natasha Romanoff", address: "890 Fifth Avenue", city: "Manhattan", state: "New York", zip: "10010", email: "spiderqueen@hotmail.com", password: "arrow", role: 0)
       @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
-      @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+      @item_order1 = @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
 
@@ -35,6 +35,15 @@ describe Order, type: :model do
 
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
+    end
+
+    it 'cancel' do
+      expect(@order_1.status).to eq("Pending")
+
+      @order_1.cancel
+
+      expect(@order_1.status).to eq("Cancelled")
+      expect(@item_order1.status).to eq("unfulfilled")
     end
   end
 end
