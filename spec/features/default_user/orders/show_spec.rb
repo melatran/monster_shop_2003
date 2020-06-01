@@ -34,7 +34,6 @@ RSpec.describe "Order Show Page" do
       expect(page).to have_content("Just a cutout")
       expect(page).to have_content("$100.00")
       expect(page).to have_content("20")
-
     end
   end
 end

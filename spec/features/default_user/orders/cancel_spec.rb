@@ -13,39 +13,31 @@ RSpec.describe "Cancelling An Order" do
     ItemOrder.create(item: @cardboard, price: @cardboard.price, quantity: 20, order_id: @order.id)
   end
 
-  it "I can cancel my order and it will display a flash message" do
+  it "I can cancel an order and the statuses of my order and item orders are changed" do
 
     visit "/default_user/profile/orders/#{@order.id}"
+
+    expect(page).to have_content("Status: Pending")
 
     click_link "Cancel Order"
 
     expect(page).to have_content("Your Order Has Been Cancelled")
     expect(current_path).to eq(default_user_profile_path)
-  end
-
-  it "when I cancel an order, the status of my items and order are changed" do
-
-    visit "/default_user/profile/orders/#{@order.id}"
-
-    expect(page).to have_content("Status: pending")
-    expect(page).to have_content("fulfilled")
-
-    click_link "Cancel Order"
 
     visit "/default_user/profile/orders/#{@order.id}"
 
     expect(page).to have_content("unfulfilled")
-    expect(page).to have_content("Status: cancelled")
+    expect(page).to have_content("Status: Cancelled")
 
     visit default_user_profile_orders_path
 
-    expect(page).to have_content("Status: cancelled")
+    expect(page).to have_content("Status: Cancelled")
   end
 end
 
 
 # User Story 30, User cancels an order
-#
+
 # As a registered user
 # When I visit an order's show page
 # I see a button or link to cancel the order

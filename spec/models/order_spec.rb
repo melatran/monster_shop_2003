@@ -36,5 +36,13 @@ describe Order, type: :model do
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
     end
+
+    it 'cancel' do
+      expect(@order_1.status).to eq("Pending")
+
+      @order_1.cancel
+
+      expect(@order_1.status).to eq("Cancelled")
+    end
   end
 end

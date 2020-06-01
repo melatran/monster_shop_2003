@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
 
-  resources :orders, only: [:new, :create, :show]
+  resources :orders, only: [:new, :create, :show, :update]
 
   get "/register", to: "users#new"
   post "/register", to: 'users#create'
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     patch "/profile", to: 'profile#update'
     get "/profile/orders", to: 'orders#index'
     get "/profile/orders/:id", to: 'orders#show'
-    put "/profile", to: 'orders#update'
+    patch "/profile/orders/:id", to: 'orders#update'
   end
 
   namespace :merchant do

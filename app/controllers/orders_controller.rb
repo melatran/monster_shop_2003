@@ -25,8 +25,7 @@ class OrdersController <ApplicationController
       render :new
     end
   end
-
-
+  
   private
 
   def order_params
