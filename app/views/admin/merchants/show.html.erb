@@ -1,0 +1,11 @@
+<h1><%=@merchant.name%></h1>
+
+<h3><%=@merchant.name%> is located at:</h3> 
+<p>Address: <%=@merchant.address%>
+<p>City: <%=@merchant.city%>
+<p>State: <%=@merchant.state%>
+<p>Zipcode: <%=@merchant.zip%>
+<h3>Items sold by <%=@merchant.name%></h3>
+<ol>
+
+<h3><%=link_to "View items sold by #{@merchant.name}", "/merchants/#{@merchant.id}/items" %></h3>
