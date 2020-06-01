@@ -2,6 +2,7 @@
 
 <p> Order Placed: <%= @order.created_at.to_formatted_s(:long) %></p>
 <p> Last Updated: <%= @order.updated_at.to_formatted_s(:long) %></p>
+
 <p> Status: <%= @order.status %></p>
 
 <p><%= link_to "Cancel Order", "/default_user/profile/orders/#{@order.id}", method: :patch unless @order.status == "Cancelled"%></p>
