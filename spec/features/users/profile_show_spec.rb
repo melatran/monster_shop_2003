@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "When i visit my proile page" do
+RSpec.describe "When i visit my profile page" do
   it "shows all of my profile data on the page except password and a link to edit my profile data" do
 
     default_user = User.create(name: "Natasha Romanoff",

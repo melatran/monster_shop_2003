@@ -1,6 +1,7 @@
 class DefaultUser::ProfileController < DefaultUser::BaseController
 
     def index
+
     end
 
     def edit
@@ -23,7 +24,7 @@ class DefaultUser::ProfileController < DefaultUser::BaseController
           flash[:notice] = "Your data was updated"
         end
         redirect_to default_user_profile_path
-      else     
+      else
         flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to "/default_user/profile/edit"
       end
@@ -37,6 +38,6 @@ class DefaultUser::ProfileController < DefaultUser::BaseController
     end
 
     def password_change?
-        params[:password] != params[:password_confirmation]      
+        params[:password] != params[:password_confirmation]
     end
 end

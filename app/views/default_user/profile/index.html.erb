@@ -1,5 +1,7 @@
-
 <p><%= link_to "Edit Profile", "/default_user/profile/edit" %></p>
+
+<p><%= link_to "My Orders", "/default_user/profile/orders" unless current_user.orders.empty? %></p>
+
 <p class ="name"><%= current_user.name %></p>
 <p><%= current_user.address %></p>
 <p><%= current_user.city %></p>

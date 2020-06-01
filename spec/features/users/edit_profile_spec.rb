@@ -46,7 +46,7 @@ RSpec.describe "User can edit their profile data" do
       city: "Manhattan",
       state: "New York",
       zip: "10010",
-      email: "spiderqueen@hotmail.com",
+      email: "forever@hotmail.com",
       password: "arrow",
       role: 0)
 
@@ -64,4 +64,32 @@ RSpec.describe "User can edit their profile data" do
       expect(page).to have_content("Name can't be blank")
 
     end
+
+    it "user can't update profile with an existing email" do
+      default_user = User.create(name: "Natasha Romanoff",
+        address: "890 Fifth Avenue",
+        city: "Manhattan",
+        state: "New York",
+        zip: "10010",
+        email: "forever@hotmail.com",
+        password: "arrow",
+        role: 0)
+      existing_user = User.create(name: "Peter Parker",
+        address: "890 Fifth Avenue",
+        city: "Manhattan",
+        state: "New York",
+        zip: "10010",
+        email: "spiderqueen@hotmail.com",
+        password: "tony",
+        role: 0)
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+        visit default_user_profile_path
+        click_on("Edit Profile")
+        fill_in "Email", with: "spiderqueen@hotmail.com"
+        click_on("Submit update")
+
+        expect(page).to have_content("Email has already been taken")
+  end
 end

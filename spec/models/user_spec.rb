@@ -11,6 +11,10 @@ RSpec.describe User, type: :model do
     it {should validate_uniqueness_of :email}
     it {should validate_presence_of :password}
 
+    describe "relationships" do
+      it {should have_many :orders}
+    end
+
     describe "roles" do
       it "can be created as a default user" do
 
@@ -55,6 +59,6 @@ RSpec.describe User, type: :model do
 
         expect(admin_user.role).to eq("admin")
         expect(admin_user.admin?).to be_truthy
-     end 
+     end
 end
-end 
+end

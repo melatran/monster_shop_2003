@@ -1,0 +1,12 @@
+<h1>Welcome <%= current_user.name %></h1>
+
+<% @orders.each do |order| %>
+  <section class= "orders-<%= order.id %>" >
+    <b> Customer Name: <%= link_to "#{order.name}", "/default_user/profile/orders/#{order.id}" %></b>
+    <p> Order ID: <%= order.id %></p>
+    <p> Order Placed: <%= order.created_at.to_formatted_s(:long) %></p>
+    <% if order.status == "packaged" %>
+      <p class= "order-<%= order.id %>" ><%= link_to "Ship", "/admin/orders?order_id=#{order.id}" %></p>
+    <% end %>
+  </section>
+<% end %>

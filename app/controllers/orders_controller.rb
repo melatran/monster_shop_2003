@@ -1,7 +1,7 @@
 class OrdersController <ApplicationController
 
   def new
-
+    non_current_user?
   end
 
   def show
@@ -9,7 +9,7 @@ class OrdersController <ApplicationController
   end
 
   def create
-    order = Order.create(order_params)
+    order = current_user.orders.create(order_params)
     if order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
@@ -19,17 +19,30 @@ class OrdersController <ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to order_path(order)
+      flash[:notice] = "Your order was created"
+      redirect_to determine_path
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
   end
-
-
+  
   private
 
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
   end
+
+  def non_current_user?
+    if current_user.nil?
+      redirect_to cart_path
+    end
+  end
+  # This method will be updated for the merchant view of orders
+  def determine_path
+    if current_default_user?
+      return default_user_profile_orders_path
+    end
+  end
+
 end

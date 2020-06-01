@@ -4,12 +4,33 @@
 <% else %>
   <h1>All Items</h1>
 <% end %>
+
+<section id="statistics">
+  <section id="most-popular">
+    <h3><b> Most Popular Items</b></h3>
+      <ol>
+        <% @items.popularity("desc").each do |item| %>
+            <li><%= "#{item.name}"%> : <%="#{item.total_quantity}" %> sold </li>
+        <% end %>
+      </ol>
+  </section>
+
+  <section id="least-popular">
+    <h3><b> Least Popular Items</b></h3>
+      <ol type = "1">
+        <% @items.popularity("asc").each do |item| %>
+            <li><%= "#{item.name}"%> : <%="#{item.total_quantity}" %> sold </li>
+        <% end %>
+      </ol>
+  </section>
+</section>
+
 <section class="grid-container">
   <% @items.each do |item| %>
     <section class = "grid-item" id= 'item-<%=item.id%>'>
       <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
       <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
-      <img src= <%= item.image %>>
+      <a <%= link_to image_tag(item.image), "/items/#{item.id}" %> </a>
       <p> <%= item.description unless @merchant%> </p>
       <p>Price: <%=number_to_currency(item.price) %> </p>
       <p>Inventory: <%= item.inventory %> </p>
