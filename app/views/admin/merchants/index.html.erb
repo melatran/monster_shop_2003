@@ -1,0 +1,15 @@
+<h1>All Merchants</h1>
+<% @merchants.each do |merchant| %>
+  <section class = "merchant-<%= merchant.id %>">
+    <center>
+      <div>
+        <%= merchant.name %>
+        <%= merchant.city %>
+        <%= merchant.state %>
+        <% if merchant.status == "disabled" %>
+        <%= button_to "Enable", "/admin/merchants/#{merchant.id}" %>
+        <% end %>
+      </div>
+    </center>
+  </section>
+<% end %>

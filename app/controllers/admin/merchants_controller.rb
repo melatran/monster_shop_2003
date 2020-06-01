@@ -1,6 +1,28 @@
 class Admin::MerchantsController < Admin::BaseController
 
-    def show
-        @merchant = Merchant.find(params[:id])
+  def index
+    @merchants = Merchant.all
+  end
+
+  def update
+    enable_merchant
+    merchant = Merchant.find(params[:id])
+    flash[:notice] = "#{merchant.name} is now enabled."
+    redirect_to "/admin/merchants"
+  end
+
+  def show
+      @merchant = Merchant.find(params[:id])
+  end
+
+  private
+  def enable_merchant
+    merchant = Merchant.find(params[:id])
+    merchant.update(status: 0)
+    items = Item.where("merchant_id = #{merchant.id}")
+    items.each do |item|
+      item.update(active?: true)
     end
-end 
+  end
+
+end

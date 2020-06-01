@@ -38,19 +38,22 @@ Rails.application.routes.draw do
     get "/profile/orders", to: 'orders#index'
     get "/profile/orders/:order_id", to: 'orders#show'
     get "/cart", to: 'cart#show'
-    get "/cancel", to: 'orders#update'  
+    get "/cancel", to: 'orders#update'
     patch "/profile/orders/:id", to: 'orders#update'
   end
 
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index'
     get '/items', to: 'merchant_items#index'
+    resources :items, only: [:index, :new, :create]
   end
 
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
     get '/merchants/:id', to: 'merchants#show'
     get '/orders', to: 'orders#update'
+    get '/merchants', to: 'merchants#index'
+    post '/merchants/:id', to: 'merchants#update'
   end
 
 
