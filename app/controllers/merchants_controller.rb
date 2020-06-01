@@ -2,13 +2,16 @@ class MerchantsController <ApplicationController
 
   def index
     @merchants = Merchant.all
+    if current_admin?
+      redirect_to "/admin/merchants"
+    end
   end
 
   def show
     @merchant = Merchant.find(params[:id])
     if current_admin?
       redirect_to "/admin/merchants/#{@merchant.id}"
-    end 
+    end
   end
 
   def new
