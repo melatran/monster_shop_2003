@@ -1,8 +1,10 @@
-<h1>History of Your Orders</h1>
+
+<h1>Order History</h1>
 
 <% @orders.each do |order| %>
-  <section class= "orders-<%= order.id %>" >
+  <section class="orders-<%= order.id %>">
     <b> Order Number: <%= link_to "#{order.id}", "/default_user/profile/orders/#{order.id}" %></b>
+    <p> Status: <%= order.status %></p>
     <p> Order Placed: <%= order.created_at.to_formatted_s(:long) %></p>
     <p> Last Updated: <%= order.updated_at.to_formatted_s(:long) %></p>
     <p> Total Quantity: <%= order.total_quantity %></p>
@@ -10,5 +12,5 @@
     <% if order.status == "pending" || order.status == "packaged" %>
       <p> <%= link_to "Cancel", "/default_user/cancel?order_id=#{order.id}" %></p>
     <% end %>
-ion>
+  </section>
 <% end %>

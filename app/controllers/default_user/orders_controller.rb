@@ -9,19 +9,10 @@ class DefaultUser::OrdersController < DefaultUser::BaseController
   end
 
   def update
-    order = Order.find(params[:order_id])
-    order.items.each do |item,quantity|
-      order.item_order.update({
-        quantity: 0,
-        price: 0,
-        status: 0
-        })
-    end
-    order.update({
-      status: 3
-      })
-    flash[:notice] = "Your order is now cancelled"
-    redirect_to "/default_user/profile"
+    order = Order.find(params[:id])
+    order.cancel
+    flash[:notice] = "Your Order Has Been Cancelled"
+    redirect_to default_user_profile_path
   end
 
   private

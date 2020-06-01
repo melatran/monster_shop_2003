@@ -84,6 +84,7 @@ RSpec.describe "User can edit their profile data" do
         role: 0)
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
         visit default_user_profile_path
         click_on("Edit Profile")
         fill_in "Email", with: "spiderqueen@hotmail.com"
