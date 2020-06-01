@@ -14,5 +14,4 @@ class DefaultUser::OrdersController < DefaultUser::BaseController
     flash[:notice] = "Your Order Has Been Cancelled"
     redirect_to default_user_profile_path
   end
-
 end

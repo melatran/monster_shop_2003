@@ -10,10 +10,10 @@ RSpec.describe "Cancelling An Order" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     @order = Order.create(name: 'Natasha Romanoff', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
-    ItemOrder.create(item: @cardboard, price: @cardboard.price, quantity: 20, order_id: @order.id)
+    ItemOrder.create(item: @cardboard, price: @cardboard.price, quantity: 2, order_id: @order.id)
   end
 
-  it "I can cancel an order and the statuses of my order and item orders are changed" do
+  it "I can cancel an order and it will update the statuses of my order and item orders" do
 
     visit "/default_user/profile/orders/#{@order.id}"
 
@@ -33,18 +33,15 @@ RSpec.describe "Cancelling An Order" do
 
     expect(page).to have_content("Status: Cancelled")
   end
+
+  it "can update inventory when order is cancelled" do
+
+    visit "/default_user/profile/orders/#{@order.id}"
+
+    expect(@shop.items.first.inventory).to eq(20)
+
+    click_link "Cancel Order"
+
+    expect(@shop.items.first.inventory).to eq(22)
+  end
 end
-
-
-# User Story 30, User cancels an order
-
-# As a registered user
-# When I visit an order's show page
-# I see a button or link to cancel the order
-# When I click the cancel button for an order, the following happens: <=
-# - Each row in the "order items" table is given a status of "unfulfilled"
-# - The order itself is given a status of "cancelled"
-# - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
-# - I am returned to my profile page
-# - I see a flash message telling me the order is now cancelled <=
-# - And I see that this order now has an updated status of "cancelled" <=
