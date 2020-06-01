@@ -58,7 +58,7 @@ describe Merchant, type: :model do
 
       bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 
-      chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 40, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 22)
+      chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 40, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 22, active?: false)
 
       tire = bike_shop.items.create(name: "Tire", description: "It'll never break!", price: 40, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 22)
 
@@ -71,8 +71,8 @@ describe Merchant, type: :model do
                                  password: "admin_password",
                                  role: 2)
 
-      # expect(tire.active?).to eq(true)
       bike_shop.inactivate_items
+      tire.reload
       expect(tire.active?).to eq(false)
     end
   end

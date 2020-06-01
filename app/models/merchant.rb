@@ -29,6 +29,8 @@ class Merchant <ApplicationRecord
   end
 
   def inactivate_items
-    Item.update(active?:false)
+    items.each do |item|
+      item.update(active?: false)
+    end
   end
 end
