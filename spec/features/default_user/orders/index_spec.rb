@@ -68,4 +68,5 @@ RSpec.describe "Default User's Profile Orders Page" do
          expect(page).to_not have_content("Order Number: #{order1.id}")
        end
      end
+
 end

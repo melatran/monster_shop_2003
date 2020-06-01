@@ -3,6 +3,16 @@ require 'rails_helper'
 RSpec.describe 'Cart show page' do
   describe 'When I have added items to my cart' do
     before(:each) do
+      default_user = User.create(name: "Natasha Romanoff",
+        address: "890 Fifth Avenue",
+        city: "Manhattan",
+        state: "New York",
+        zip: "10010",
+        email: "spiderqueen@hotmail.com",
+        password: "arrow",
+        role: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 
@@ -36,22 +46,22 @@ RSpec.describe 'Cart show page' do
 
       within "#cart-item-#{@tire.id}" do
         click_button "Add one more.."
-      end 
+      end
 
-      expect(page).to have_content("You've added one more #{@tire.name} to your cart") 
-      expect(page).to have_content("Cart: 4") 
-      
+      expect(page).to have_content("You've added one more #{@tire.name} to your cart")
+      expect(page).to have_content("Cart: 4")
+
       within "#cart-item-#{@paper.id}" do
         click_button "Add one more.."
-      end 
-      
-      expect(page).to have_content("You've added one more #{@paper.name} to your cart") 
-      expect(page).to have_content("Cart: 5") 
-      
+      end
+
+      expect(page).to have_content("You've added one more #{@paper.name} to your cart")
+      expect(page).to have_content("Cart: 5")
+
       within "#cart-item-#{@paper.id}" do
         click_button "Add one more.."
         expect(page).to_not have_button("Add one more..")
-      end 
+      end
 
     end
 
@@ -60,11 +70,11 @@ RSpec.describe 'Cart show page' do
       visit "/cart"
 
       expect(page).to have_content("Cart: 3")
-      
+
       within "#cart-item-#{@paper.id}" do
         click_button "Remove one.."
-      end 
-      
+      end
+
       expect(page).to_not have_link("#{@paper.name}")
       expect(page).to have_link("#{@tire.name}")
       expect(page).to have_link("#{@pencil.name}")
