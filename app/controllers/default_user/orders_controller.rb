@@ -20,7 +20,6 @@ class DefaultUser::OrdersController < DefaultUser::BaseController
     order.update({
       status: 3
       })
-    binding.pry
     flash[:notice] = "Your order is now cancelled"
     redirect_to "/default_user/profile"
   end
