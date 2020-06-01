@@ -38,11 +38,11 @@ describe Order, type: :model do
     end
 
     it 'cancel' do
-      expect(@order_1.status).to eq("Pending")
+      expect(@order_1.status).to eq("pending")
 
       @order_1.cancel
 
-      expect(@order_1.status).to eq("Cancelled")
+      expect(@order_1.status).to eq("cancelled")
       expect(@item_order1.status).to eq("unfulfilled")
     end
   end

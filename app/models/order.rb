@@ -15,7 +15,7 @@ class Order <ApplicationRecord
   end
 
   def cancel
-    update(status: "Cancelled")
+    update(status: 3)
 
     item_orders.each do |item_order|
       item_order.update(status: 0)

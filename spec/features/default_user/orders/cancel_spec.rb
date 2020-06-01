@@ -17,7 +17,7 @@ RSpec.describe "Cancelling An Order" do
 
     visit "/default_user/profile/orders/#{@order.id}"
 
-    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("Status: pending")
 
     click_link "Cancel Order"
 
@@ -27,11 +27,8 @@ RSpec.describe "Cancelling An Order" do
     visit "/default_user/profile/orders/#{@order.id}"
 
     expect(page).to have_content("unfulfilled")
-    expect(page).to have_content("Status: Cancelled")
+    expect(page).to have_content("Status: cancelled")
 
-    visit default_user_profile_orders_path
-
-    expect(page).to have_content("Status: Cancelled")
   end
 
   it "can update inventory when order is cancelled" do
