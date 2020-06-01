@@ -2,10 +2,13 @@
 
 <% @orders.each do |order| %>
   <section class= "orders-<%= order.id %>" >
-    <b> Order Number: <%= link_to "#{order.id}“, “/default_user/profile/orders/#{order.id}" %></b>
+    <b> Order Number: <%= link_to "#{order.id}", "/default_user/profile/orders/#{order.id}" %></b>
     <p> Order Placed: <%= order.created_at.to_formatted_s(:long) %></p>
     <p> Last Updated: <%= order.updated_at.to_formatted_s(:long) %></p>
     <p> Total Quantity: <%= order.total_quantity %></p>
     <p> Grand Total: <%= number_to_currency(order.grandtotal) %></p>
+    <% if order.status == "pending" || order.status == "packaged" %>
+      <p> <%= link_to "Cancel", "/default_user/cancel?order_id=#{order.id}" %></p>
+    <% end %>
   </section>
 <% end %>
