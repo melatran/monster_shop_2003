@@ -6,7 +6,7 @@ class Admin::MerchantsController < Admin::BaseController
   end
 
   def update
-    merchant = Merchant.find(parmas[:id])
+    merchant = Merchant.find(params[:id])
     if merchant.status == "disabled"
       enable_merchant
       flash[:notice] = "#{merchant.name} is now enabled."

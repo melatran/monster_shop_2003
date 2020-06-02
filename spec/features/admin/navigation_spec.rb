@@ -81,15 +81,10 @@ RSpec.describe 'As an admin user' do
           visit "/admin/merchants"
 
           within ".merchant-#{bike_shop.id}" do
-            expect(page).to have_content("enabled")
-            click_on "Disable"
+            click_button "Disable"
           end
 
           expect(page).to have_content("#{bike_shop.name} has been disabled")
-
-          within ".merchant-#{bike_shop.id}" do
-            expect(page).to have_content("disabled")
-          end
 
           visit "/merchants/#{bike_shop.id}/items"
 

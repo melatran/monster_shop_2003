@@ -4,7 +4,7 @@
   <section class = "merchant-<%= merchant.id %>">
     <center>
       <div>
-        <%= merchant.name %>
+        <%=link_to merchant.name, "/merchants/#{merchant.id}"%>
         <%= merchant.city %>
         <%= merchant.state %>
         <% if merchant.status == "disabled" %>
