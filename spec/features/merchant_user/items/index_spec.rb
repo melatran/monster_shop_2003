@@ -19,7 +19,7 @@ RSpec.describe "Merchant Employee Items Index Page" do
     @helmet = @bike_shop.items.create(name: "Brain Keeper", description: "Will keep your brain in one piece!", price: 30, image: "https://green.harvard.edu/sites/green.harvard.edu/files/field-feature/explore_area_image/bikehelmet_0.jpg", inventory: 6)
   end
 
-  it "can dispplay the information of each item the merchant sells" do
+  it "can display the information of each item the merchant sells" do
 
     visit "/merchant/items"
 
