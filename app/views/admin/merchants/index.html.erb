@@ -5,6 +5,7 @@
   <section class="merchant-<%= merchant.id %>" >
     <li><%=link_to merchant.name, "/merchants/#{merchant.id}"%></li>
       <p>Status: <%= merchant.status %></p>
+      <p>Location: <%= merchant.city %> , <%= merchant.state %></p>
       <p><%= link_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %></p>
   </section>
 <% end %>
