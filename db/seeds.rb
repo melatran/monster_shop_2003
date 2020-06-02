@@ -65,3 +65,5 @@ order2 = Order.create(name: 'Natasha Romanoff', address: '123 Stang Ave', city: 
 
 ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 2, order_id: order1.id)
 ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 3, order_id: order2.id)
+
+shop2 = Merchant.create(name: "Circle K", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203, status: 1)
