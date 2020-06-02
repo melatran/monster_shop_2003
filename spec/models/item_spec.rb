@@ -48,13 +48,7 @@ describe Item, type: :model do
       order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
-
-    # it 'deactivates items' do
-    #   @chain.deactivate_item
-    #   @chain.reload
-    #   expect(@chain.active).to eq?(false)
-    # end
-
+    
     describe "class methods" do
 
       it ".popularity for most" do

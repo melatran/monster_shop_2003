@@ -5,6 +5,7 @@ class Merchant::MerchantItemsController < Merchant::BaseController
 
   def update
     item = Item.find(params[:id])
+    #I was thinking an if else statement when it comes to updating items (status vs editing)
     change_item_status
     redirect_to "/merchant/items"
   end
