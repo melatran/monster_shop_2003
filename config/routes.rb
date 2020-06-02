@@ -51,10 +51,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
     get '/merchants/:id', to: 'merchants#show'
+    get '/merchants', to: 'merchants#index'
+    patch '/merchants/:id', to: 'merchants#update'
     get '/orders', to: 'orders#update'
     get '/merchants', to: 'merchants#index'
     patch '/merchants/:id', to: 'merchants#update'
   end
-
-
 end
