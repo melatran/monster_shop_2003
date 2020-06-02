@@ -1,19 +1,24 @@
 class Merchant::MerchantItemsController < Merchant::BaseController
+  def index
+    @user = current_user
+  end
 
-    def index
-        @user = current_user
+  def update
+    item = Item.find(params[:id])
+    change_item_status
+    redirect_to "/merchant/items"
+  end
+
+  private
+
+  def change_item_status
+    item = Item.find(params[:id])
+    if item.active? == true
+      item.update(active?:false)
+      flash[:notice] = "#{item.name} is no longer for sale"
+    else
+      item.update(active?:true)
+      flash[:notice] = "#{item.name} is now available for sale"
     end
-
-    def update
-      item = Item.find(params[:id])
-
-      if item.active? == true
-        item.update(active?:false)
-        flash[:notice] = "#{item.name} is no longer for sale"
-      else
-        item.update(active?:true)
-        flash[:notice] = "#{item.name} is now available for sale"
-      end
-      redirect_to "/merchant/items"
-    end
+  end
 end
