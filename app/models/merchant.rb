@@ -28,4 +28,9 @@ class Merchant <ApplicationRecord
     item_orders.distinct.joins(:order).pluck(:city)
   end
 
+  def inactivate_items
+    items.each do |item|
+      item.update(active?: false)
+    end
+  end
 end

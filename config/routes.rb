@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     get "/profile/orders", to: 'orders#index'
     get "/profile/orders/:order_id", to: 'orders#show'
     get "/cart", to: 'cart#show'
-    get "/cancel", to: 'orders#update'  
+    get "/cancel", to: 'orders#update'
     patch "/profile/orders/:id", to: 'orders#update'
   end
 
@@ -50,8 +50,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
     get '/merchants/:id', to: 'merchants#show'
+    get '/merchants', to: 'merchants#index'
+    patch '/merchants/:id', to: 'merchants#update'
     get '/orders', to: 'orders#update'
   end
-
-
 end
