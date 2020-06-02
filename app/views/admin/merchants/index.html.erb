@@ -7,7 +7,7 @@
         <%= merchant.city %>
         <%= merchant.state %>
         <% if merchant.status == "disabled" %>
-        <%= button_to "Enable", "/admin/merchants/#{merchant.id}" %>
+        <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
         <% end %>
       </div>
     </center>
