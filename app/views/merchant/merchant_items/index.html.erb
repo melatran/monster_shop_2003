@@ -13,6 +13,7 @@
         <button><%= link_to "Deactivate", "/merchant/items/#{item.id}", method: :patch %></button>
       <% else %>
         Inactive
+        <button><%= link_to "Activate", "/merchant/items/#{item.id}", method: :patch %></button>
     <% end %>
   </section>
 <%end%>
