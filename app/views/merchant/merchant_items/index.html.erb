@@ -1,6 +1,7 @@
 <h2>Items Sold By <%=@user.merchant.name%></h2>
 <ol>
 <%@user.items_sold.each do |item|%>
+  <section class = "items-<%= item.id %> ">
     <li><b><%= item.name %></b></li>
     <p class="w3-round"><img src= <%= item.image %> ></p>
     <p>Description: <%= item.description %></p>
@@ -13,5 +14,6 @@
       <% else %>
         Inactive
     <% end %>
+  </section>
 <%end%>
 </ol>

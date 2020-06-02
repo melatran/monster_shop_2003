@@ -23,11 +23,22 @@ RSpec.describe "Merchant Employee Items Index Page" do
 
     visit "/merchant/items"
 
-    expect(page).to have_content(@tire.name)
-    expect(page).to have_css("img[src='#{@tire.image}']")
-    expect(page).to have_content(@tire.description)
-    expect(page).to have_content(@tire.price)
-    expect(page).to have_content(@tire.inventory)
-    expect(page).to have_content("Active")
+    within ".items-#{@tire.id}" do
+      expect(page).to have_content(@tire.name)
+      expect(page).to have_css("img[src='#{@tire.image}']")
+      expect(page).to have_content(@tire.description)
+      expect(page).to have_content(@tire.price)
+      expect(page).to have_content(@tire.inventory)
+      expect(page).to have_content("Active")
+    end
+
+    within ".items-#{@helmet.id}" do
+      expect(page).to have_content(@helmet.name)
+      expect(page).to have_css("img[src='#{@helmet.image}']")
+      expect(page).to have_content(@helmet.description)
+      expect(page).to have_content(@helmet.price)
+      expect(page).to have_content(@helmet.inventory)
+      expect(page).to have_content("Active")
+    end
   end
 end
