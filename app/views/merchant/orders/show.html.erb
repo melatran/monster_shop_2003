@@ -1,0 +1,13 @@
+<div>
+  <% @orders.each do |order| %>
+    <p><%= order.name %> - <%= order.address %></p>
+    <% @item_orders.each do |item_order| %>
+      <p><%= link_to "#{item_order.item.name}", "/items/#{item_order.item.id}" %></p>
+      <div style="height:20%;width:20%">
+        <img class="img-thumbnail-<%= item_order.item.id%>" src= <%= item_order.item.image %>, onerror="this.src='https://www.parksmarina.com/images/not_available.png';">
+      </div>
+      <p>Price of Item: <%= number_to_currency(item_order.item.price) %></p>
+      <p>Quantity: <%= item_order.quantity %></p>
+    <% end %>
+  <% end %>
+</div>
