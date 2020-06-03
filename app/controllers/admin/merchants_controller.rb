@@ -2,7 +2,7 @@ class Admin::MerchantsController < Admin::BaseController
 
 
   def index
-    @merchants = Merchant.all
+    @merchants = Merchant.all # overwrite to sort(:name)
   end
 
   def update
@@ -19,16 +19,15 @@ class Admin::MerchantsController < Admin::BaseController
   end
 
   def show
-      @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
   end
 
   private
+
   def enable_merchant
-    merchant = Merchant.find(params[:id])
+    merchant = Merchant.find_by(params[:id])
+    merchant.activate_items
     merchant.update(status: 0)
-    items = Item.where("merchant_id = #{merchant.id}")
-    items.each do |item|
-      item.update(active?: true)
-    end
   end
+
 end

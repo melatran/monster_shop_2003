@@ -2,7 +2,7 @@ class Merchant <ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :item_orders, through: :items
 
-  has_many :users
+  has_many :users, dependent: :destroy
 
   validates_presence_of :name,
                         :address,
@@ -33,4 +33,15 @@ class Merchant <ApplicationRecord
       item.update(active?: false)
     end
   end
+
+  def activate_items
+    items.each do |item|
+      item.update(active?: true)
+    end
+  end
+
+  def self.find_by(params)
+    merchant = Merchant.find(params)
+  end
+
 end

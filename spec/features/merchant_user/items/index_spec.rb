@@ -23,7 +23,7 @@ RSpec.describe "Merchant Employee Items Index Page" do
 
     visit "/merchant/items"
 
-    within ".items-#{@tire.id}" do
+    within ".item-#{@tire.id}" do
       expect(page).to have_content(@tire.name)
       expect(page).to have_css("img[src='#{@tire.image}']")
       expect(page).to have_content(@tire.description)
@@ -32,7 +32,7 @@ RSpec.describe "Merchant Employee Items Index Page" do
       expect(page).to have_content("Active")
     end
 
-    within ".items-#{@helmet.id}" do
+    within ".item-#{@helmet.id}" do
       expect(page).to have_content(@helmet.name)
       expect(page).to have_css("img[src='#{@helmet.image}']")
       expect(page).to have_content(@helmet.description)

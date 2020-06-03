@@ -20,7 +20,7 @@ RSpec.describe "Merchant Employee Can Deactivate Item" do
 
     visit "/merchant/items"
 
-    within ".items-#{tire.id}" do
+    within ".item-#{tire.id}" do
       expect(page).to have_content("Active")
       click_link "Deactivate"
     end

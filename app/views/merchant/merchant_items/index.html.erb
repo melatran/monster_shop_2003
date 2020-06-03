@@ -1,7 +1,7 @@
 <h2>Items Sold By <%=@user.merchant.name%></h2>
 <ol>
 <%@user.items_sold.each do |item|%>
-  <section class = "items-<%= item.id %> ">
+  <section class = "item-<%= item.id %> ">
     <li><b><%= item.name %></b></li>
     <p class="w3-round"><img src= <%= item.image %> ></p>
     <p>Description: <%= item.description %></p>
@@ -15,6 +15,7 @@
         Inactive
         <button><%= link_to "Activate", "/merchant/items/#{item.id}", method: :patch %></button>
     <% end %>
+    <p><%= link_to "Edit" , "/merchant/items/#{item.id}", method: :get%></p>
   </section>
 <%end%>
 </ol>
