@@ -1,6 +1,10 @@
 <h2>Items sold by <%=@user.merchant.name%></h2>
 <ol>
 <%@user.items_sold.each do |item|%>
-    <li><%=item.name%></li>
+<div class="item-<%= item.id %>">
+    <li><%=item.name%>
+    <%= link_to "Edit" , "/merchant/items/#{item.id}", method: :get%>
+    </li>
+</div>
 <%end%>
 </ol>

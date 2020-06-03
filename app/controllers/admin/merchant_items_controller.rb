@@ -1,16 +1,8 @@
-class Merchant::MerchantItemsController < Merchant::BaseController
-
-    def index
-      @user = current_user
-    end
-
-    def show
-      @items = Item.where("merchant_id = params[:id]")
-    end
+class Admin::AdminMerchantItemsController < Admin::BaseController
 
     def edit
       @item = Item.find(params[:item_id])
-      @merchant = current_user
+      @merchant = Merchant.find(@item.merchant_id)
     end
 
     def update
@@ -28,10 +20,10 @@ class Merchant::MerchantItemsController < Merchant::BaseController
     def updateable?
       if @item.save
         flash[:notice] = "#{@item.name} has been updated"
-        redirect_to "/merchant/items"
+        redirect_to "/admin/merchants/#{@item.merchant_id}/items"
       else
         flash[:error] = @item.errors.full_messages.to_sentence
-        redirect_to "/merchant/items/#{@item.id}"
+        redirect_to "/admin/merchant/items/#{@item.id}"
       end
     end
 end
