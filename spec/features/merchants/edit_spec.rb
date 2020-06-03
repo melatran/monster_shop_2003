@@ -105,7 +105,7 @@ RSpec.describe "As a Visitor" do
       fill_in :description, with: "This is amazing"
 
       click_on "Update Item"
-
+      
       expect(current_path).to eq("/merchant/items")
 
       expect(page).to have_content("Test has been updated")

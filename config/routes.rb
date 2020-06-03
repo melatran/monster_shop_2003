@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
 
-  resources :orders, only: [:new, :create, :show]
+  get "/orders/new", to: 'orders#new'
+  get "/orders/:id", to: 'orders#show'
+  post "/orders", to: 'orders#create'
 
   get "/register", to: "users#new"
   post "/register", to: 'users#create'
@@ -45,8 +47,9 @@ Rails.application.routes.draw do
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index'
     get '/items', to: 'merchant_items#index'
-    get '/items/:item_id', to: 'merchant_items#edit'
     patch '/items', to: 'merchant_items#update'
+    get '/items/:item_id', to: 'merchant_items#edit'
+    patch '/items/:item_id', to: 'merchant_items#update'
     resources :items, only: [:index, :new, :create]
     get '/orders', to: 'orders#show'
   end
@@ -60,6 +63,8 @@ Rails.application.routes.draw do
     get '/merchants', to: 'merchants#index'
     patch '/merchants/:id', to: 'merchants#update'
     get '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#edit'
-    patch '/merchants/:merchant_id/items', to: '/merchant_items#update'
+    # patch '/merchants/:merchant_id/items', to: '/merchant_items#update'
+    get '/merchants/:id/items', to: 'merchant_items#index'
+    patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
   end
 end

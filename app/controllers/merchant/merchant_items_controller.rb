@@ -14,9 +14,14 @@ class Merchant::MerchantItemsController < Merchant::BaseController
     end
 
     def update
-      @item = Item.find(params[:item])
-      @item.update(item_params)
-      updateable?
+      @item = Item.find(params[:item_id])
+      if params[:edit] == "1"
+        @item.update(item_params)
+        updateable?
+      else
+        change_item_status
+        redirect_to "/merchant/items"
+      end
     end
 
     private
@@ -34,4 +39,16 @@ class Merchant::MerchantItemsController < Merchant::BaseController
         redirect_to "/merchant/items/#{@item.id}"
       end
     end
+
+  def change_item_status
+    item = Item.find(params[:item_id])
+    if item.active? == true
+      item.update(active?:false)
+      flash[:notice] = "#{item.name} is no longer for sale"
+    else
+      item.update(active?:true)
+      flash[:notice] = "#{item.name} is now available for sale"
+    end
+  end
+
 end

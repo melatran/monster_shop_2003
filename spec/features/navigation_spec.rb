@@ -47,18 +47,18 @@ RSpec.describe 'Site Navigation' do
 
     it 'I am not able to access any path that begins with /profile, /merchant, or /admin' do
 
-      visit '/admin/dashboard' 
+      visit '/admin/dashboard'
 
       expect(page).to have_content("The page you were looking for doesn't exist.")
-      
+
       visit '/merchant/dashboard'
-      
-      expect(page).to have_content("The page you were looking for doesn't exist.")
-      
-      visit '/default_user/profile'
-      
+
       expect(page).to have_content("The page you were looking for doesn't exist.")
 
-    end 
+      visit '/default_user/profile'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+    end
   end
 end

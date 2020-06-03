@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
         email: "wintersoldier@hotmail.com",
         password: "america",
         role: 1)
-
+        
       expect(user.role).to eq("merchant")
       expect(user.merchant?).to be_truthy
     end

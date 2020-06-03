@@ -27,6 +27,7 @@ RSpec.describe("Order Creation") do
       click_on "Add To Cart"
       visit "/default_user/cart"
       click_on "Checkout"
+      visit "/orders/new"
 
       name = "Bert"
       address = "123 Sesame St."
@@ -54,6 +55,7 @@ RSpec.describe("Order Creation") do
     end
 
     it 'i cant create order if info not filled out' do
+      visit "/orders/new"
       name = ""
       address = "123 Sesame St."
       city = "NYC"

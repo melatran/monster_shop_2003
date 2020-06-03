@@ -1,14 +1,30 @@
-class Admin::AdminMerchantItemsController < Admin::BaseController
+class Admin::MerchantItemsController < Admin::BaseController
+
+    def index
+      @merchant = Merchant.find(params[:id])
+    end
 
     def edit
-      @item = Item.find(params[:item_id])
+      @item = Item.find(params[:merchant_id])
       @merchant = Merchant.find(@item.merchant_id)
     end
 
     def update
-      @item = Item.find(params[:item])
-      @item.update(item_params)
-      updateable?
+      item = Item.find(params[:item_id])
+      merchant = Merchant.find(params[:merchant_id])
+      if params[:edit] == 1
+        item.update(item_params)
+        updateable?
+      else
+        if item.active? == true
+          item.update(active?:false)
+          flash[:notice] = "#{item.name} is no longer for sale"
+        else
+          item.update(active?:true)
+          flash[:notice] = "#{item.name} is now available for sale"
+        end
+        redirect_to "/admin/merchants/#{merchant.id}/items"
+      end
     end
 
     private
@@ -26,4 +42,19 @@ class Admin::AdminMerchantItemsController < Admin::BaseController
         redirect_to "/admin/merchant/items/#{@item.id}"
       end
     end
+
+
+  # def update
+  #   merchant = Merchant.find(params[:merchant_id])
+  #   item = Item.find(params[:item_id])
+  #   if item.active? == true
+  #     item.update(active?:false)
+  #     flash[:notice] = "#{item.name} is no longer for sale"
+  #   else
+  #     item.update(active?:true)
+  #     flash[:notice] = "#{item.name} is now available for sale"
+  #   end
+  #   redirect_to "/admin/merchants/#{merchant.id}/items"
+  # end
+
 end
