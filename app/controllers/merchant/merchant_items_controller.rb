@@ -5,7 +5,7 @@ class Merchant::MerchantItemsController < Merchant::BaseController
     end
 
     def show
-      @items = Item.where("merchant_id = params[:id]")
+      @items = Item.where("merchant_id = #{params[:id]}")
     end
 
     def edit
