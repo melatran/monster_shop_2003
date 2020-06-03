@@ -1,6 +1,7 @@
-<h2>Items Sold By <%=@user.merchant.name%></h2>
+<h2>Items Sold By <%=@merchant.name%></h2>
+
 <ol>
-<%@user.items_sold.each do |item|%>
+<% @merchant.items.each do |item|%>
   <section class = "items-<%= item.id %> ">
     <li><b><%= item.name %></b></li>
     <p class="w3-round"><img src= <%= item.image %> ></p>
@@ -10,10 +11,10 @@
     <p>Status:
     <% if item.active? %>
         Active
-        <button><%= link_to "Deactivate", "/merchant/items/#{item.id}", method: :patch %></button>
+        <button><%= link_to "Deactivate", "/admin/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %></button>
       <% else %>
         Inactive
-        <button><%= link_to "Activate", "/merchant/items/#{item.id}", method: :patch %></button>
+        <button><%= link_to "Activate", "/admin/merchants/#{@merchant.id}/items/#{item.id}", method: :patch %></button>
     <% end %>
   </section>
 <%end%>

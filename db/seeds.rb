@@ -56,6 +56,7 @@ admin2 = User.create(name: "Rostam",
                                        email: "Rostammahabadi@gmail.com",
                                        password: "asdf",
                                        role: 2)
+
 shop = Merchant.create(name: "K-Pop Black Market", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 cardboard = shop.items.create(name: "EXO Kai Cardboard", description: "Just a cutout", price: 100, image: "https://images-na.jpg", inventory: 20)
 

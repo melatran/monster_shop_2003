@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index'
     get '/items', to: 'merchant_items#index'
+    patch '/items/:id', to: 'merchant_items#update'
     resources :items, only: [:index, :new, :create]
   end
 
@@ -56,5 +57,7 @@ Rails.application.routes.draw do
     get '/orders', to: 'orders#update'
     get '/merchants', to: 'merchants#index'
     patch '/merchants/:id', to: 'merchants#update'
+    get '/merchants/:id/items', to: 'merchant_items#index'
+    patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
   end
 end
