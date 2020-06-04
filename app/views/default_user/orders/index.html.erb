@@ -1,6 +1,6 @@
-
 <h1>Order History</h1>
 
+<center>
 <% @orders.each do |order| %>
   <section class="orders-<%= order.id %>">
     <b> Order Number: <%= link_to "#{order.id}", "/default_user/profile/orders/#{order.id}" %></b>
@@ -14,3 +14,4 @@
     <% end %>
   </section>
 <% end %>
+</center>
