@@ -2,7 +2,6 @@
   <center>
     <h3><%= @order.name %></h3>
     <h5>Address: <%= @order.address %></h5>
-  </center>
 
   <% current_user.merchant.items_from_order(@order).each do |item_order| %>
     <section class="order-<%=item_order.id%>" >
@@ -22,4 +21,5 @@
         <% end %>
     </section>
   <% end %>
+  </center>
 </div>

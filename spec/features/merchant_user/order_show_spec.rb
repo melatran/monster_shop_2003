@@ -27,21 +27,9 @@ RSpec.describe "merchant sees an order show page" do
     end
 
     it "shows receipients name and address " do
-      visit "/merchant/dashboard"
-      click_on "Orders"
-      has_link? "#{@order_1.name}"
-      expect(page).to have_content("#{@order_1.address}")
-      expect(page).to have_content("#{@orderitem1.item.name}")
-      first(".img-thumbnail-#{@orderitem1.item.id}").present?
-      expect(page).to have_content("#{@orderitem1.price}")
-      expect(page).to have_content("#{@orderitem1.quantity}")
-      expect(page).to_not have_content("#{@orderitem2.item.name}")
-      expect(page).to_not have_content("#{@orderitem3.item.name}")
-    end
-
-    it "displays the order information" do
       visit "/merchant/orders/#{@order_1.id}"
 
+      has_link? "#{@order_1.name}"
       expect(page).to have_content("#{@order_1.address}")
       expect(page).to have_content("#{@orderitem1.item.name}")
       first(".img-thumbnail-#{@orderitem1.item.id}").present?
