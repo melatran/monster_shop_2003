@@ -1,7 +1,7 @@
 # Monster Shop 2003 
 BE Mod2 Group Project
 
-Visit Our Monster Shop Application: 
+Visit Our Monster Shop Application: https://monster-shop-2020.herokuapp.com/
 
 **Team Members**
 
