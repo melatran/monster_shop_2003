@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   namespace :merchant do
+    get '/', to: 'dashboard#index'
     get '/dashboard', to: 'dashboard#index'
     get '/items', to: 'merchant_items#index'
     delete '/items/:id', to: 'merchant_items#destroy'
@@ -59,6 +60,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get '/', to: 'dashboard#index'
     get '/dashboard', to: 'dashboard#index'
     get '/merchants/:id', to: 'merchants#show'
     get '/merchants', to: 'merchants#index'
