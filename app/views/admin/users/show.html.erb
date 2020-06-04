@@ -1,0 +1,8 @@
+<p><%= link_to "#{@user.name}'s Orders", "/admin/users/#{@user.id}/orders" unless @user.orders.empty? %></p>
+
+<p class ="name"><%= @user.name %></p>
+<p><%= @user.address %></p>
+<p><%= @user.city %></p>
+<p><%= @user.state %></p>
+<p><%= @user.zip %></p>
+<p><%= @user.email %></p>
