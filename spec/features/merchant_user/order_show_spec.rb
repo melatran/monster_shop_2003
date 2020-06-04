@@ -37,13 +37,18 @@ RSpec.describe "merchant sees an order show page" do
       expect(page).to have_content("#{@orderitem1.quantity}")
       expect(page).to_not have_content("#{@orderitem2.item.name}")
       expect(page).to_not have_content("#{@orderitem3.item.name}")
-
     end
 
+    it "displays the order information" do
+      visit "/merchant/orders/#{@order_1.id}"
 
-
+      expect(page).to have_content("#{@order_1.address}")
+      expect(page).to have_content("#{@orderitem1.item.name}")
+      first(".img-thumbnail-#{@orderitem1.item.id}").present?
+      expect(page).to have_content("#{@orderitem1.price}")
+      expect(page).to have_content("#{@orderitem1.quantity}")
+      expect(page).to_not have_content("#{@orderitem2.item.name}")
+      expect(page).to_not have_content("#{@orderitem3.item.name}")
     end
-
-
-
   end
+end
