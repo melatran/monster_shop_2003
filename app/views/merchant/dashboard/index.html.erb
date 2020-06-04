@@ -10,4 +10,26 @@
 <ol>
 
 <h3><%=link_to "View items sold by #{@user.merchant.name}", "/merchant/items" %></h3>
+
+
+<ol align="left">
+<h3 align="left">Pending orders:</h3>
+<%@orders.each do |order|%>
+    <section align="left" class="order-<%=order.id%>">
+        <li align="left"><p>Order number: <%= link_to order.id, "/orders/#{order.id}" %></li></p>
+            <p><strong>Order created at: <%=order.created_at.to_formatted_s(:long)%></strong></p>
+            <p><strong>Total cost for items in order: $<%=order.grandtotal_for_merchant(current_user)%></strong></p>
+            <p>Items sold:</p>
+            <ul>
+            <%order.items.each do |item|%>
+                <% if item.merchant_id == @user.merchant.id %>
+                    <p><li align="left"><%=item.name%> Number ordered: <%=item.total_in_order(order.id, item.id)%></li><br>
+                    <p align="left"><strong>Subtotal for <%=item.name%>: $<%= item.subtotal_item(order.id, item.id)%></strong></p>
+                <%end%>
+            <%end%> 
+            </ul>            
+    </section>
+<%end%>
+</ol>
 <h3><%= link_to "Orders", "/merchant/orders" %></h3>
+
