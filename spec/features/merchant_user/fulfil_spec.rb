@@ -15,7 +15,7 @@ RSpec.describe "Merchant Order Show Page" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_user)
   end
 
-  it "merchant fulfils part of an order if not already fulfilled" do
+  it "merchant fulfills part of an order if not already fulfilled" do
     visit "/items/#{@tire.id}"
     expect(page).to have_content("Inventory: 12")
 
@@ -37,7 +37,7 @@ RSpec.describe "Merchant Order Show Page" do
     expect(page).to have_content("Inventory: 10")
   end
 
-  it "user wont see fulfil button if itm is fulfilled" do
+  it "user wont see fulfill button if itm is fulfilled" do
     order2 = Order.create!(name: 'Natasha', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
     orderitem2 = order2.item_orders.create!(item: @tire, price: @tire.price, quantity: 2, status: 1)
 
@@ -50,13 +50,13 @@ RSpec.describe "Merchant Order Show Page" do
     end
   end
 
-  it "user can't fulfil item when not enough stock" do
+  it "user can't fulfill item when not enough stock" do
     helmet = @bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 5)
     order2 = Order.create!(name: 'Natasha', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
     orderitem2 = order2.item_orders.create!(item: helmet, price: helmet.price, quantity: 6)
 
     visit "/merchant/orders/#{order2.id}"
-  
+
     within ".order-#{orderitem2.id}" do
       expect(page).to have_content("You don't have enough in stock")
     end
