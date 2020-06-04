@@ -1,18 +1,21 @@
-# Monster Shop 2003 (BE Mod2 Group Project)
+# Monster Shop 2003 
+BE Mod2 Group Project
+
+Visit Our Monster Shop Application: 
 
 **Team Members**
+
 [Joshua Tukman](https://github.com/Joshua-Tukman)
+
 [Rostam Mahabadi](https://github.com/Rostammahabadi)
+
 [Melanie Tran](https://github.com/melatran)
+
 [Jack Puchalla](https://github.com/JPuchalla)
 
 ## Background Information
 
 "Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
-
-### Prerequisites
-
-
 
 ### Setup
 
@@ -26,46 +29,90 @@
 
 Run `bundle exec rspec` in your terminal
 
-### And coding style tests
+## User Roles
 
-Explain what these tests test and why
+1. Visitor - this type of user is anonymously browsing our site and is not logged in
+
+2. Regular User - this user is registered and logged in to the application while performing their work; can place items in a cart and create an order
+
+3. Merchant Employee - this user works for a merchant. They can fulfill orders on behalf of their merchant. They also have the same permissions as a regular user (adding items to a cart and checking out)
+
+4. Admin User - a registered user who has "superuser" access to all areas of the application; user is logged in to perform their work
+
+### Register
+<img width="628" alt="Screen Shot 2020-06-04 at 5 03 50 PM" src="https://user-images.githubusercontent.com/59414750/83818832-8a566380-a685-11ea-973c-437abb250569.png">
+
+## Default User
+
+- When users register for a new account, they are assigned a role of a regular user by default
+- Visitors must log in to check out
+- Users can add items into their cart and create an order
+- They do not have access to admin or merchant functionality
+- Users can also edit their profile and update their password
 
 ```
-Give an example
+  def update
+      if password_change?
+        flash[:error] = "Password and confirmation password need to match"
+        redirect_to "/default_user/profile/edit?pw=change"
+        return
+      end
+      current_user.update(user_params)
+      if current_user.save
+        if params[:pw] == "changed"
+          flash[:notice] = "Your password has been updated"
+        else
+          flash[:notice] = "Your data was updated"
+        end
+        redirect_to default_user_profile_path
+      else
+        flash[:error] = current_user.errors.full_messages.to_sentence
+        redirect_to "/default_user/profile/edit"
+      end
+    end
+ ```
+
+## Merchant
+
+- Merchants can fulfil orders from users/customers
+- Merchants have the ability to enable and disable their own items
+
+<img width="1066" alt="Screen Shot 2020-06-04 at 5 26 58 PM" src="https://user-images.githubusercontent.com/59414750/83820047-c212da80-a688-11ea-832c-22ea9ed81680.png">
+
+## Admin
+
+- Admin are considered superusers with access to all areas of the application
+- Admin can see all orders in the system
+- Admin has the ability to enable and disable items and merchants
+
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
-
+  def update
+      item = Item.find(params[:item_id])
+      merchant = Merchant.find(params[:merchant_id])
+      if params[:edit] == 1
+        item.update(item_params)
+        updateable?
+      else
+        if item.active? == true
+          item.update(active?:false)
+          flash[:notice] = "#{item.name} is no longer for sale"
+        else
+          item.update(active?:true)
+          flash[:notice] = "#{item.name} is now available for sale"
+        end
+        redirect_to "/admin/merchants/#{merchant.id}/items"
+      end
+    end
+  ```
+  
+  ```
+  def updateable?
+      if @item.save
+        flash[:notice] = "#{@item.name} has been updated"
+        redirect_to "/admin/merchants/#{@item.merchant_id}/items"
+      else
+        flash[:error] = @item.errors.full_messages.to_sentence
+        redirect_to "/admin/merchant/items/#{@item.id}"
+      end
+    end
+  ```
