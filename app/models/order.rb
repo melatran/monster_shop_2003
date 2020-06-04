@@ -10,6 +10,11 @@ class Order <ApplicationRecord
     item_orders.sum('price * quantity')
   end
 
+  def grandtotal_for_merchant(current_user)
+    x = current_user.merchant.id
+    item_orders.joins(:item).where('items.merchant_id = ?', x).sum('item_orders.price * item_orders.quantity')
+  end
+
   def total_quantity
     item_orders.sum(:quantity)
   end
@@ -22,4 +27,9 @@ class Order <ApplicationRecord
       item_order.item.update(inventory: item_order.item.inventory + item_order.quantity)
     end
   end
+
+  def items_subtotal(merchant_id)
+    
+  end
+
 end

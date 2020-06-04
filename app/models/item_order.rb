@@ -9,4 +9,10 @@ class ItemOrder <ApplicationRecord
   def subtotal
     price * quantity
   end
+
+  def total_price(item_order_array)
+    item_order_array.sum do |item_order|
+      item_order.price * item_order.quantity
+    end
+  end 
 end

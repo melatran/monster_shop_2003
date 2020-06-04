@@ -1,6 +1,15 @@
-<h2>Items sold by <%=@user.merchant.name%></h2>
+<h2>Items sold by <%=current_user.merchant.name%></h2>
 <ol>
-<%@user.items_sold.each do |item|%>
-    <li><%=item.name%></li>
+<%current_user.items_sold.each do |item|%>
+    <%if item.active? %>
+    <section class="item-<%=item.id%>">
+        <li><p><%=item.name%></p></li>
+            <%if item.never_sold?(item.id)%>
+                <%=link_to "Delete item", "/merchant/items/#{item.id}", method: :delete %>
+            <%end%>
+    </section>
+    <%end%>
 <%end%>
 </ol>
+
+<%=link_to "Add new item", "/merchant/items/new"%>
