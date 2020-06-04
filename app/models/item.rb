@@ -7,11 +7,9 @@ class Item <ApplicationRecord
   validates_presence_of :name,
                         :description,
                         :price,
-                        #:image,
                         :inventory
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
-
 
   def average_review
     reviews.average(:rating)
@@ -28,7 +26,7 @@ class Item <ApplicationRecord
   def self.popularity(direction)
       joins(:item_orders).select("items.*, sum(item_orders.quantity) as total_quantity").group(:id).order("total_quantity #{direction}").limit(5)
   end
-
+  
   def total_in_order(odr_id, itm_id) 
     ItemOrder.where('item_id = ?', itm_id).where('order_id = ?', odr_id).first.quantity
   end

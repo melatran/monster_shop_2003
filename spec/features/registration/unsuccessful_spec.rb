@@ -24,7 +24,7 @@ RSpec.describe 'As a visitor' do
             fill_in 'confirm_password', with: password
 
             click_on "Create Account"
-            
+
             expect(page).to have_content("Name can't be blank")
 
             visit '/register'

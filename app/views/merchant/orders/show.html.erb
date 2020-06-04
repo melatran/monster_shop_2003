@@ -1,0 +1,25 @@
+<div>
+  <center>
+    <h3><%= @order.name %></h3>
+    <h5>Address: <%= @order.address %></h5>
+  </center>
+
+  <% current_user.merchant.items_from_order(@order).each do |item_order| %>
+    <section class="order-<%=item_order.id%>" >
+      <p><%= link_to "#{item_order.item.name}", "/items/#{item_order.item.id}" %></p>
+      <div style="height:20%;width:20%">
+        <img class="img-thumbnail-<%= item_order.item.id%>" src= <%= item_order.item.image %>, onerror="this.src='https://www.parksmarina.com/images/not_available.png';">
+      </div>
+      <p>Price of Item: <%= number_to_currency(item_order.item.price) %></p>
+      <p>Quantity: <%= item_order.quantity %></p>
+      <p>Status: <%= item_order.status %>
+        <% if item_order.can_be_fulfilled? %>
+          <button><%= link_to "Fulfill Item", "/merchant/orders/#{item_order.id}", method: :patch %></button></p>
+        <% elsif item_order.fulfilled? %>
+          <p> You have fulfilled the item </p>
+        <% else %>
+          <p> You don't have enough in stock </p>
+        <% end %>
+    </section>
+  <% end %>
+</div>

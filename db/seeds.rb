@@ -57,6 +57,7 @@ admin2 = User.create(name: "Rostam",
                                        email: "Rostammahabadi@gmail.com",
                                        password: "asdf",
                                        role: 2)
+
 shop = Merchant.create(name: "K-Pop Black Market", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 cardboard = shop.items.create(name: "EXO Kai Cardboard", description: "Just a cutout", price: 100, image: "https://images-na.jpg", inventory: 20)
 
@@ -66,5 +67,10 @@ order2 = Order.create(name: 'Natasha Romanoff', address: '123 Stang Ave', city: 
 
 ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 2, order_id: order1.id)
 ItemOrder.create(item: cardboard, price: cardboard.price, quantity: 3, order_id: order2.id)
-
+ItemOrder.create!(item: tire, price: tire.price, quantity: 2, status: 1, order_id: order1.id)
+ItemOrder.create!(item: pull_toy, price: pull_toy.price, quantity: 3, status: 1, order_id: order1.id)
+ItemOrder.create!(item: dog_bone, price: dog_bone.price, quantity: 2, status: 1, order_id: order1.id)
+ItemOrder.create!(item: pull_toy, price: pull_toy.price, quantity: 2, status: 1, order_id: order2.id)
+ItemOrder.create!(item: tire, price: tire.price, quantity: 2, status: 1, order_id: order2.id)
+ItemOrder.create!(item: dog_bone, price: dog_bone.price, quantity: 5, status: 1, order_id: order2.id)
 shop2 = Merchant.create(name: "Circle K", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203, status: 1)

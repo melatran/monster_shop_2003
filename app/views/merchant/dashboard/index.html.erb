@@ -1,7 +1,7 @@
 <h1>Welcome <%=@user.name%></h1>
 <h3>This user has level one access and employed by <%=@user.merchant.name%></h3>
 
-<h3><%=current_user.merchant.name%> is located at:</h3> 
+<h3><%=current_user.merchant.name%> is located at:</h3>
 <p>Address: <%=@user.merchant.address%>
 <p>City: <%=@user.merchant.city%>
 <p>State: <%=@user.merchant.state%>
@@ -10,6 +10,7 @@
 <ol>
 
 <h3><%=link_to "View items sold by #{@user.merchant.name}", "/merchant/items" %></h3>
+
 
 <ol align="left">
 <h3 align="left">Pending orders:</h3>
@@ -30,3 +31,5 @@
     </section>
 <%end%>
 </ol>
+<h3><%= link_to "Orders", "/merchant/orders" %></h3>
+

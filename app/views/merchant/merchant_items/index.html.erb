@@ -1,14 +1,27 @@
 <h2>Items sold by <%=current_user.merchant.name%></h2>
+
+<h2>Items Sold By <%=@user.merchant.name%></h2>
 <ol>
-<%current_user.items_sold.each do |item|%>
-    <%if item.active? %>
-    <section class="item-<%=item.id%>">
-        <li><p><%=item.name%></p></li>
-            <%if item.never_sold?(item.id)%>
+<%@user.items_sold.each do |item|%>
+  <section class = "item-<%= item.id %> ">
+    <li><b><%= item.name %></b></li>
+    <p class="w3-round"><img src= <%= item.image %> ></p>
+    <p>Description: <%= item.description %></p>
+    <p>Price: <%= item.price %></p>
+    <p>Inventory: <%= item.inventory %></p>
+    <p>Status:
+    <% if item.active? %>
+        Active
+        <button><%= link_to "Deactivate", "/merchant/items/#{item.id}", method: :patch %></button>
+      <% else %>
+        Inactive
+        <button><%= link_to "Activate", "/merchant/items/#{item.id}", method: :patch %></button>
+    <% end %>
+    <p><%= link_to "Edit" , "/merchant/items/#{item.id}", method: :get%></p>
+    <%if item.never_sold?(item.id)%>
                 <%=link_to "Delete item", "/merchant/items/#{item.id}", method: :delete %>
-            <%end%>
-    </section>
     <%end%>
+  </section>
 <%end%>
 </ol>
 

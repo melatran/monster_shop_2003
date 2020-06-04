@@ -1,5 +1,8 @@
+require 'rails_helper'
+
 RSpec.describe "Order Creation" do
   describe "it has a form to create new order" do
+
     before(:each) do
       @user = User.create!(name: "Natasha Romanoff", address: "890 Fifth Avenue", city: "Manhattan", state: "New York", zip: "10010", email: "spiderqueen@hotmail.com", password: "arrow", role: 0)
 
@@ -22,8 +25,9 @@ RSpec.describe "Order Creation" do
       click_on "Add To Cart"
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
-      visit "/cart"
+      visit "/default_user/cart"
       click_on "Checkout"
+      visit "/orders/new"
 
       name = "Bert"
       address = "123 Sesame St."
@@ -43,7 +47,6 @@ RSpec.describe "Order Creation" do
 
       expect(current_path).to eq("/default_user/profile/orders")
 
-
       within ".orders-#{@new_order.id}" do
 
         expect(page).to have_content("Status: pending")
@@ -62,6 +65,15 @@ RSpec.describe "Order Creation" do
 
       visit "/orders/new"
 
+      within ".orders-#{@new_order.id}" do
+        expect(page).to have_content('pending')
+        expect(page).to have_content(@new_order.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@new_order.updated_at.to_formatted_s(:long))
+      end
+    end
+
+    it 'i cant create order if info not filled out' do
+      visit "/orders/new"
       name = ""
       address = "123 Sesame St."
       city = "NYC"
