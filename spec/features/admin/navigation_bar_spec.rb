@@ -11,9 +11,9 @@ RSpec.describe 'As an admin user' do
                                        zip: "81111",
                                        email: "admin_email@gmail.com",
                                        password: "admin_password",
-                                       role: 2) 
-                                
-            allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)  
+                                       role: 2)
+
+            allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
             visit "/admin/dashboard"
 
@@ -21,6 +21,7 @@ RSpec.describe 'As an admin user' do
                 expect(page).to have_link("Home")
                 expect(page).to have_link("All Merchants")
                 expect(page).to have_link("All Items")
+                expect(page).to have_link("All Users")
                 expect(page).to have_link("Dashboard")
                 expect(page).to_not have_link("Login")
                 expect(page).to_not have_link("Register")
