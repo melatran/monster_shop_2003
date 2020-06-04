@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
     validates_confirmation_of :password, :message => "Your email and email confirmation must match"
 
-    has_many :orders, dependent: :destroy
+    has_many :orders
 
     belongs_to :merchant, optional: true
 

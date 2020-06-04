@@ -1,6 +1,6 @@
 class Order <ApplicationRecord
   validates_presence_of :name, :address, :city, :state, :zip
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_many :item_orders
   has_many :items, through: :item_orders
 
@@ -29,7 +29,7 @@ class Order <ApplicationRecord
   end
 
   def items_subtotal(merchant_id)
-    
+
   end
 
 end

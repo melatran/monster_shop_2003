@@ -7,8 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Merchant.destroy_all
-Item.destroy_all
 User.destroy_all
+Item.destroy_all
+Order.destroy_all
 ItemOrder.destroy_all
 
 #merchants
