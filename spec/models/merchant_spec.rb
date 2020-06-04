@@ -75,5 +75,20 @@ describe Merchant, type: :model do
       tire.reload
       expect(tire.active?).to eq(false)
     end
+
+    it 'items_from_order' do
+      bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+      merchant_user = User.create(name: "Brian", address: "123 West 4th", city: "Sterling", state: "Virginia", zip: "92383", email: "Brian@gmail.com", password: "asdf", role: 1, merchant_id: "#{bike_shop.id}")
+
+       #order
+      user = User.create(name: "Natasha Romanoff", address: "890 Fifth Avenue", city: "Manhattan", state: "New York", zip: "10010", email: "spiderqueen2@hotmail.com", password: "arrow", role: 0)
+      order_1 = Order.create!(name: 'Natasha', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: user.id)
+      orderitem1 = order_1.item_orders.create!(item: tire, price: tire.price, quantity: 2)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_user)
+
+      expect(bike_shop.items_from_order(order_1)).to eq([orderitem1])
+    end
   end
 end
