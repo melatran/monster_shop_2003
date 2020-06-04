@@ -44,4 +44,7 @@ class Merchant <ApplicationRecord
     merchant = Merchant.find(params)
   end
 
+  def items_from_order(order)
+    item_orders.where("item_orders.order_id = #{order.id}")
+  end
 end
