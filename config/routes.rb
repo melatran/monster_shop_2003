@@ -67,5 +67,6 @@ Rails.application.routes.draw do
     get '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#edit'
     get '/merchants/:id/items', to: 'merchant_items#index'
     patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
+    get '/users', to: 'users#index'
   end
 end
