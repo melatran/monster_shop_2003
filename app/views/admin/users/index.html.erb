@@ -1,0 +1,9 @@
+<h1>All Users in Monster Shop</h1>
+
+<% @users.each do |user| %>
+  <section class="users-<%= user.id %>">
+    <p><b>Name:</b> <%= link_to user.name, "/admin/users/#{user.id}" %></p>
+    <p>Registered Date: <%= user.created_at.to_formatted_s(:long) %></p>
+    <p>Type of User: <%= user.role %></p>
+  </section>
+<% end %>
