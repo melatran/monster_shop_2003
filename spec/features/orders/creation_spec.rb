@@ -13,7 +13,7 @@ RSpec.describe "Order Creation" do
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
       @paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
       @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
-    
+
     end
 
     it 'I can create a new order' do
@@ -51,7 +51,7 @@ RSpec.describe "Order Creation" do
 
         expect(page).to have_content("Status: pending")
         expect(page).to have_link(@new_order.id)
-        
+
         expect(page).to have_content("Order Placed: #{@new_order.created_at.to_formatted_s(:long)}")
         expect(page).to have_content("Last Updated: #{@new_order.updated_at.to_formatted_s(:long)}")
         expect(page).to have_content("Total Quantity: #{@new_order.total_quantity}")
@@ -59,17 +59,6 @@ RSpec.describe "Order Creation" do
 
       end
 
-    end
-
-    it 'i cant create order if info not filled out' do
-
-      visit "/orders/new"
-
-      within ".orders-#{@new_order.id}" do
-        expect(page).to have_content('pending')
-        expect(page).to have_content(@new_order.created_at.to_formatted_s(:long))
-        expect(page).to have_content(@new_order.updated_at.to_formatted_s(:long))
-      end
     end
 
     it 'i cant create order if info not filled out' do
@@ -94,4 +83,4 @@ RSpec.describe "Order Creation" do
 
 
   end
-end 
+end

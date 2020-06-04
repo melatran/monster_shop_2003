@@ -60,8 +60,8 @@ describe Item, type: :model do
       expect(@pull_toy.total_in_order(@order_1.id, @pull_toy.id)).to eq(3)
       expect(@tire.total_in_order(@order_1.id, @tire.id)).to eq(2)
     end
-    
-    it 'subtotal_item' do     
+
+    it 'subtotal_item' do
       expect(@pull_toy.subtotal_item(@order_1.id, @pull_toy.id)).to eq(30)
       expect(@tire.subtotal_item(@order_1.id, @tire.id)).to eq(200)
     end
@@ -73,8 +73,8 @@ describe Item, type: :model do
     end
   end
 
-  describe 'class methods' do 
-  
+  describe 'class methods' do
+
       it ".popularity for most" do
         shop1 = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
         shop2 = Merchant.create(name: "K-Pop Black Market", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -137,8 +137,7 @@ describe Item, type: :model do
         expect(Item.popularity('asc')).to eq([pencil, fan, dolls, cardboard, ahgabong])
       end
     end
- 
-  
+
+
 
   end
-end
