@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     patch '/items', to: 'merchant_items#update'
     get '/items/:item_id', to: 'merchant_items#edit'
     patch '/items/:item_id', to: 'merchant_items#update'
-    resources :items, only: [:index, :new, :create]
+    get '/orders', to: 'orders#index'
     get '/orders/:id', to: 'orders#show'
     patch '/orders/:id', to: 'orders#update'
   end
@@ -73,5 +73,6 @@ Rails.application.routes.draw do
     patch '/merchants/:merchant_id/items/:item_id', to: 'merchant_items#update'
     get '/users', to: 'users#index'
     get '/users/:id', to: 'users#show'
+    get '/users/:id/orders', to: 'orders#show'
   end
 end

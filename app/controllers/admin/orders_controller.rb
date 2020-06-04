@@ -8,4 +8,8 @@ class Admin::OrdersController < Admin::BaseController
       })
     redirect_to "/admin/dashboard"
   end
+
+  def show
+    @orders = Order.where('user_id = ?', params[:id])
+  end 
 end
