@@ -2,26 +2,41 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "welcome#index"
 
-  resources :merchants do
-    resources :items, only: [:index, :new, :create]
-  end
+  # resources :merchants do
+  #   resources :items, only: [:index, :new, :create]
+  # end
+  get "/merchants/:id/items", to: "items#index"
+  get "/merchants/:id/items/new", to: "items#new"
+  post "/merchants/:id/items", to: "items#create"
 
-  resources :items, only: [:index, :show, :edit, :destroy, :update]
+  # resources :items, only: [:index, :show, :edit, :destroy, :update]
+  get "/items", to: "items#index"
+  get "/items/:id/edit", to: "items#edit"
+  patch "/items/:id", to: "items#update"
+  get "/items/:id", to: "items#show"
+  delete "/items/:id", to: "items#destroy"
 
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"
 
-  resources :reviews, only: [:edit, :update, :destroy]
+  # resources :reviews, only: [:edit, :update, :destroy]
+  get "/reviews/:id/edit", to: "reviews#edit"
+  patch "/reviews/:id", to: "reviews#update"
+  delete "/reviews/:id", to: "reviews#destroy"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
 
-  get "/orders/new", to: 'orders#new'
-  get "/orders/:id", to: 'orders#show'
-  post "/orders", to: 'orders#create'
+  resources :orders, only: [:new, :show, :create]
+  # get "/orders/new", to: 'orders#new'
+  # get "/orders/:id", to: 'orders#show'
+  # post "/orders", to: 'orders#create'
 
+  # resources :register do
+  #   resources :users, only: [:new, :create]
+  # end
   get "/register", to: "users#new"
   post "/register", to: 'users#create'
 
